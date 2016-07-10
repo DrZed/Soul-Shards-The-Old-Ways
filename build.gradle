@@ -1,0 +1,94 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url = "http://files.minecraftforge.net/maven" }
+        maven { url = "https://oss.sonatype.org/content/repositories/snapshots/" }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'org.ajoberstar:gradle-git:0.10.1'
+    }
+}
+
+apply plugin: 'forge'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+def build_number = '0'
+
+if (System.getenv('BUILD_NUMBER') != null)
+    build_number = System.getenv('BUILD_NUMBER')
+
+group = package_group
+archivesBaseName = mod_name
+version = "${mc_version}-${mod_version}-${build_number}"
+
+repositories {
+	maven { url "http://tehnut.info/maven/" }
+	maven { url "http://chickenbones.net/maven/" }
+	maven {	url "http://mobiusstrip.eu/maven" }
+    maven { url 'http://dvs1.progwml6.com/files/maven' }
+}
+
+dependencies {
+	compile "mcp.mobius.waila:Waila:${waila_version}_${mc_version}:dev"
+	//compile "codechicken:CodeChickenLib:${mc_version}-${ccl_version}:dev"
+	compile "codechicken:CodeChickenCore:${mc_version}-${ccc_version}:dev"
+	compile "codechicken:NotEnoughItems:${mc_version}-${nei_version}:dev"
+	compile fileTree(dir: 'libs', include: ['*jar'])
+}
+
+minecraft {
+    version = "1.7.10-10.13.4.1558-1.7.10"
+    runDir = "run"
+
+	replaceIn "Reference.java"
+    replace "@VERSION@", project.version
+	
+    if (project.hasProperty('mappings_version'))
+        mappings = project.mappings_version
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include '**/*.info'
+        include '**/*.properties'
+
+        expand 'version': project.version, 'mcversion': project.minecraft.version
+    }
+    from(sourceSets.main.resources.srcDirs) {
+        exclude '**/*.info'
+        exclude '**/*.properties'
+    }
+}
+
+jar {
+    manifest.mainAttributes(
+            "Built-By": System.getProperty('user.name'),
+            "Created-By": "${System.getProperty('java.vm.version')} + (${System.getProperty('java.vm.vendor')})",
+            "Implementation-Title": project.name,
+            "Implementation-Version": project.version
+    )
+}
+
+// Source jar
+task sourceJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+// Deobf jar
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'deobf'
+}
+
+tasks.build.dependsOn sourceJar, deobfJar
+
+tasks.withType(JavaCompile) { task ->
+    task.options.encoding = 'UTF-8'
+}

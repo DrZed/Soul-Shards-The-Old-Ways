@@ -1,0 +1,154 @@
+# Items
+# Shards
+HxCShards.shard.unbound.name=Unbound Soul Shard
+HxCShards.shard.name=Soul Shard
+item.guide.book.missing.name=Torn Page
+
+# Materials
+item.HxCShards.material.nugget.iron.name=Iron Nugget
+item.HxCShards.material.nugget.soulium.name=Soulium Nugget
+item.HxCShards.material.ingot.soulium.name=Soulium Ingot
+item.HxCShards.material.dust.vile.name=Vile Dust
+
+# Tools
+HxCShards.soultool.sword.name=Soul Blade
+HxCShards.soultool.pickaxe.name=Soul Pickaxe
+HxCShards.soultool.axe.name=Soul Axe
+HxCShards.soultool.spade.name=Soul Spade
+
+# Blocks
+HxCShards.soul_forge.name=Soul Forge
+tile.HxCShards.block.forge.name=Soul Forge
+tile.hxcshards.block.forge=Soul Forge
+tile.HxCShards.cage.name=Soul Cage
+tile.HxCShards.block.material.soulium.name=Block of Soulium
+
+# Enchantment
+enchantment.soul_stealer=Soul Stealer
+
+# Achievements
+achievement.createShard=Create a Soul Shard
+achievement.createShard.desc=Created your first Soul Shard
+
+achievement.shard_tier_1=You have blood on your hands
+achievement.shard_tier_1.desc=Gained a Tier 1 Shard
+
+achievement.shard_tier_2=Murderer
+achievement.shard_tier_2.desc=Gained a Tier 2 Shard
+
+achievement.shard_tier_3=Heinous Crimes
+achievement.shard_tier_3.desc=Gained a Tier 3 Shard
+
+achievement.shard_tier_4=What is wrong with you?
+achievement.shard_tier_4.desc=Gained a Tier 4 Shard
+
+achievement.shard_tier_5=Monster
+achievement.shard_tier_5.desc=Gained a Tier 5 Shard
+
+achievement.shard_tier_6=Bloodthirsty
+achievement.shard_tier_6.desc=Gained a Tier 6 Shard
+
+achievement.shard_tier_7=Fiend
+achievement.shard_tier_7.desc=Gained a Tier 7 Shard
+
+achievement.shard_tier_8=Genocidal Maniac
+achievement.shard_tier_8.desc=Gained a Tier 8 Shard
+
+achievement.shard_tier_9=Destroyer of Life
+achievement.shard_tier_9.desc=Gained a Tier 9 Shard
+
+achievement.shard_tier_10=Satanic
+achievement.shard_tier_10.desc=Gained a Tier 10 Shard
+
+achievement.shard_tier_11=Hell Spawn
+achievement.shard_tier_11.desc=Gained a Tier 11 Shard
+
+achievement.shard_tier_12=Demon
+achievement.shard_tier_12.desc=Gained a Tier 12 Shard
+
+achievement.shard_tier_13=Wicked Demigod
+achievement.shard_tier_13.desc=Gained a Tier 13 Shard
+
+achievement.shard_tier_14=Devil
+achievement.shard_tier_14.desc=Gained a Tier 14 Shard
+
+achievement.shard_tier_15=God of Destruction
+achievement.shard_tier_15.desc=Maxed out a Soul Shard
+
+achievement.shard_tier_X=Bloody Insane
+achievement.shard_tier_X.desc=Go beyond default tier shard.
+
+achievement.createCage=These are the Soul Cages
+achievement.createCage.desc=Crafted a Soul Cage
+
+achievement.vile_dust=Vile Dusting
+achievement.vile_dust.desc=Smelted Soul Sand
+
+achievement.soulForge=Forge Of Souls
+achievement.soulForge.desc=Crafted the Soul Forge
+
+# GUI
+container.soulforge=Soul Forge
+container.soulcage=Soul Cage
+itemGroup.HxCShards=HxCShards
+
+# Soul Shard Details
+chat.hxcshards.shard.owner=Owned by: %s
+chat.hxcshards.shard.unbound=You need to bind the shard to a mob type
+chat.hxcshards.shard.levelup=You need to level the shard to tier 1 before you can use it in a cage
+chat.hxcshards.shard.level=Soul Shard Tier %s
+chat.hxcshards.shard.bound=Bound to: %s
+chat.hxcshards.shard.player=Checks Player: %s
+chat.hxcshards.shard.light=Checks Lightlevels: %s
+chat.hxcshards.shard.dimension=Checks Dimension: %s
+chat.hxcshards.shard.redstone=Uses Redstone: %s
+chat.hxcshards.shard.quantity=Spawn Amount: %s
+chat.hxcshards.shard.rate=Spawn Rate: %s
+
+# Debug
+chat.hxcshards.debug.tileerror=ERROR: no tile entity found at coords: %s
+chat.hxcshards.debug.nounlocname=Player killed entity with no unlocalized name: %s
+chat.hxcshards.debug.successspawn=Successfully spawned: %s
+chat.hxcshards.debug.tierkillsfail=Custom tier kill settings are incorrect, resetting defaults.
+chat.hxcshards.debug.tierkillssuccess=Loaded custom tier kill settings!
+chat.hxcshards.debug.shardkillerror=Soul shard has an incorrect kill counter of: %s
+
+# Commands
+chat.hxcshards.command.help=--- Showing hxcshards help page 1 of 1 ---
+chat.hxcshards.command.killall=/hxcshards killall to kill all the hxcshards entities
+chat.hxcshards.command.settier=/hxcshards settier x to set tier of the shard
+chat.hxcshards.command.addkills=/hxcshards addkills x to add kills
+chat.hxcshards.command.removekills=/hxcshards removekills x to remove kills
+chat.hxcshards.command.notfound=No spawned entities were found!
+chat.hxcshards.command.killed=Mobs Killed: %s
+chat.hxcshards.command.setwrong=Wrong use of command, /hxcshards settier x
+chat.hxcshards.command.addkillwrong=Wrong use of command, /hxcshards addkills x
+chat.hxcshards.command.remkillwrong=Wrong use of command, /hxcshards removekills x
+chat.hxcshards.command.purge=Breaks spawners owned by x in world if blank all break /soulshards purge x
+chat.hxcshards.command.stop=Temporarily stops spawners owned by x in world if blank all stop for y time /soulshards purge [x] <y>
+chat.hxcshards.command.wrongcommand=Command not recognised, use /hxcshards help for a list of all the available commands
+
+# Utils
+chat.hxcshards.util.configload=Loaded configuration file!
+chat.hxcshards.util.configloadfail=Failed to load configuration file!
+chat.hxcshards.util.entitylistload=Soul Shards Loaded Entity List
+chat.hxcshards.util.entitylistloadfail=Soul Shards had a problem loading Entity List
+chat.hxcshards.util.entitymapskip1=Already Mapped, skipping: %s
+chat.hxcshards.util.entitymapskip2=Boss Detected, skipping %s
+chat.hxcshards.util.entitymapdone=Finished Mapping, Entities Found: %s
+
+# Tooltips
+info.hxcshards.tooltip.book=Book
+info.hxcshards.tooltip.page=Page
+info.hxcshards.tooltip.hold=Hold
+info.hxcshards.tooltip.shift=Shift
+info.hxcshards.tooltip.forDetails=For Details
+
+# Mod Compat
+
+# WAILA Support
+hxcshards.waila.soulcage.mob=Entity: 
+hxcshards.waila.soulcage.tier=Tier: 
+hxcshards.waila.soulcage.activated=Status: Activated
+hxcshards.waila.soulcage.deactivated=Status: Deactivated
+hxcshards.waila.soulcage.empty=Status: Empty
