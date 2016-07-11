@@ -147,8 +147,8 @@ info.hxcshards.tooltip.forDetails=For Details
 # Mod Compat
 
 # WAILA Support
-hxcshards.waila.soulcage.mob=Entity: 
-hxcshards.waila.soulcage.tier=Tier: 
-hxcshards.waila.soulcage.activated=Status: Activated
-hxcshards.waila.soulcage.deactivated=Status: Deactivated
-hxcshards.waila.soulcage.empty=Status: Empty
+HxCShards.waila.soulcage.mob=Entity: 
+HxCShards.waila.soulcage.tier=Tier: 
+HxCShards.waila.soulcage.activated=Status: Activated
+HxCShards.waila.soulcage.deactivated=Status: Deactivated
+HxCShards.waila.soulcage.empty=Status: Empty
