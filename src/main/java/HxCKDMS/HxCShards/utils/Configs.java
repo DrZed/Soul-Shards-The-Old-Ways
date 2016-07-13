@@ -53,7 +53,7 @@ public class Configs {
 		t.Kills = KillsRequired;
 		t.LightCheck = percent < 0.3f;
 		t.WorldCheck = percent < 0.7f;
-		t.Spawns = (byte)(percent * maxspawns);
+		t.Spawns = ((byte)(percent * maxspawns) >= 1 ? (byte)(percent * maxspawns) : 1);
 		t.PlayerCheck = percent < 0.5f;
 		t.Redstone = percent > 0.6f;
 		return t;

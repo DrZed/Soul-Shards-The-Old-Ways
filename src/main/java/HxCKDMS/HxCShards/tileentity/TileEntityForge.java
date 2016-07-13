@@ -115,8 +115,7 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
 		tagCompound.setTag("Items", tagList);
 	}
 
-	public void updateEntity() {
-        if (progress < 0) progress = 0;
+    public boolean checkFuel() {
         if (fuelTime > 0) {
             fuelTime--;
         } else if (fuelTime == 0 && itemCookTime > 0 && progress < itemCookTime-1) {
@@ -125,42 +124,57 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
             if (fuelTime == 0) {
                 progress = 0;
                 itemCookTime = 0;
-                return;
+                return false;
             } else fuelTime2 = fuelTime;
         }
+        return true;
+    }
+
+    private boolean cookItem() {
+        if (getStackInSlot(2) != null && ModRegistry.sFHandler.getSmeltingResult(getStackInSlot(0)).getItem() == getStackInSlot(2).getItem()) {
+            ItemStack out = ModRegistry.sFHandler.getSmeltingResult(getStackInSlot(0));
+            if (out.stackSize + out.stackSize > 64)
+                return false;
+            out.stackSize += out.stackSize;
+            setInventorySlotContents(2, out);
+        } else {
+            setInventorySlotContents(2, ModRegistry.sFHandler.getSmeltingResult(getStackInSlot(0)));
+        }
+        decrStackSize(0, 1);
+        return true;
+    }
+
+	public void updateEntity() {
+        if (progress < 0) {progress = 0;}
+
+        if (!checkFuel()) return;
+
         if (getStackInSlot(0) == null || (getStackInSlot(2) != null && getStackInSlot(2).stackSize == 64)) return;
 
-        if (getStackInSlot(0) != null && itemCookTime > 0 && progress != itemCookTime && itemCookTime != ModRegistry.sFHandler.getSmeltingTime(getStackInSlot(0))) {
+        if (itemCookTime > 0 && progress != itemCookTime && itemCookTime != ModRegistry.sFHandler.getSmeltingTime(getStackInSlot(0))) {
             float f = (float)progress/(float)itemCookTime;
             itemCookTime = ModRegistry.sFHandler.getSmeltingTime(getStackInSlot(0));
             progress = Math.round(f * itemCookTime);
         }
 
         if (itemCookTime > 0 && progress >= itemCookTime) {
-            if (getStackInSlot(2) != null && ModRegistry.sFHandler.getSmeltingResult(getStackInSlot(0)).getItem() == getStackInSlot(2).getItem()) {
-                ItemStack out = ModRegistry.sFHandler.getSmeltingResult(getStackInSlot(0));
-                out.stackSize += out.stackSize;
-                setInventorySlotContents(2, out);
-            } else {setInventorySlotContents(2, ModRegistry.sFHandler.getSmeltingResult(getStackInSlot(0)));}
+            if (!cookItem()) return;
             progress = 0;
             itemCookTime = 0;
-            decrStackSize(0, 1);
         } else if (itemCookTime > 0) {
             progress++;
-        } else {
-            if (getStackInSlot(0) != null && (getStackInSlot(1) != null || fuelTime > 1) && isItemValidForSlot(2, ModRegistry.sFHandler.getSmeltingResult(getStackInSlot(0)))) {
-                itemCookTime = ModRegistry.sFHandler.getSmeltingTime(getStackInSlot(0));
-                progress = 0;
-                fuelTime = ModRegistry.sFHandler.getFuelBurnTime(getStackInSlot(1));
-                decrStackSize(1, 1);
-                fuelTime2 = fuelTime;
-            }
+        } else if (fuelTime > 0 || isItemFuel(getStackInSlot(1))) {
+            itemCookTime = ModRegistry.sFHandler.getSmeltingTime(getStackInSlot(0));
+            progress = 0;
+            fuelTime = ModRegistry.sFHandler.getFuelBurnTime(getStackInSlot(1));
+            decrStackSize(1, 1);
+            fuelTime2 = fuelTime;
         }
 	}
 
 	public static boolean isItemFuel(ItemStack itemstack) {
-		return ModRegistry.sFHandler.getFuelList().containsKey(itemstack);
-	}
+        return itemstack != null && ModRegistry.sFHandler.getFuelList().containsKey(itemstack);
+    }
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
