@@ -136,12 +136,12 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
             progress = Math.round(f * itemCookTime);
         }
 
-        if (itemCookTime > 0 && progress == itemCookTime && isItemValidForSlot(2, ModRegistry.sFHandler.getSmeltingResult(getStackInSlot(0)))) {
-            if (getStackInSlot(2) != null) {
+        if (itemCookTime > 0 && progress >= itemCookTime) {
+            if (getStackInSlot(2) != null && ModRegistry.sFHandler.getSmeltingResult(getStackInSlot(0)).getItem() == getStackInSlot(2).getItem()) {
                 ItemStack out = ModRegistry.sFHandler.getSmeltingResult(getStackInSlot(0));
-                out.stackSize += 1;
+                out.stackSize += out.stackSize;
                 setInventorySlotContents(2, out);
-            } else setInventorySlotContents(2, ModRegistry.sFHandler.getSmeltingResult(getStackInSlot(0)));
+            } else {setInventorySlotContents(2, ModRegistry.sFHandler.getSmeltingResult(getStackInSlot(0)));}
             progress = 0;
             itemCookTime = 0;
             decrStackSize(0, 1);

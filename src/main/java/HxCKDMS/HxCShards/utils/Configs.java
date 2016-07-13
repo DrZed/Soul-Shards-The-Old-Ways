@@ -15,7 +15,7 @@ public class Configs {
 
 	// Soul Cage
 	public static int maxEntities = 80;
-	public static boolean invertRedstone, absorbAnySpawner, useSSTOWTextures, floodPrevention = true;
+	public static boolean invertRedstone, absorbAnySpawner, useSSTOWTextures, floodPrevention = true, BossMobShards = true;
 
 	// Recipes Section
 	public static int cookingModifier = 10, tier1Kills = 64;

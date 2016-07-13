@@ -29,7 +29,7 @@ public class ForgeRecipeHandler extends FurnaceRecipeHandler {
 		public SmeltingPair(ItemStack output, ItemStack input) {
             input.stackSize = 1;
 			this.ingred = new PositionedStack(input, 51, 6);
-			this.result = new PositionedStack(output, 111, 20);
+			this.result = new PositionedStack(output, 111, 22);
 		}
 
 		@Override

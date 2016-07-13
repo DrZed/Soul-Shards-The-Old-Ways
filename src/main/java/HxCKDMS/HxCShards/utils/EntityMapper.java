@@ -4,6 +4,7 @@ import HxCKDMS.HxCCore.api.Utils.LogHelper;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.world.World;
@@ -16,22 +17,20 @@ import java.util.Map;
 //import net.minecraft.entity.boss.IBossDisplayData;
 
 public final class EntityMapper {
-	public static List<String> entityList = new ArrayList<String>();
+	public static List<String> entityList = new ArrayList<>();
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void init() {
-		for (Map.Entry<Class, String> entry : ((HashMap<Class, String>) EntityList.classToStringMapping)
-				.entrySet()) {
-
+		for (Map.Entry<Class, String> entry : ((HashMap<Class, String>) EntityList.classToStringMapping).entrySet()) {
 			if (entityList.contains(entry.getValue())) {
 				LogHelper.debug(Utils.localizeFormatted("chat.sstow.util.entitymapskip1", "" + entry.getValue()), Reference.modName);
 				continue;
 			}
 
-//			if (IBossDisplayData.class.isAssignableFrom(entry.getKey())) {
-//				ModLogger.logInfo(Utils.localizeFormatted("chat.sstow.util.entitymapskip2", "" + entry.getValue()));
-//				continue;
-//			}
+			if (IBossDisplayData.class.isAssignableFrom(entry.getKey()) && !Configs.BossMobShards) {
+                LogHelper.debug(Utils.localizeFormatted("chat.sstow.util.entitymapskip2", "" + entry.getValue()), Reference.modName);
+				continue;
+			}
 
 			if (EntityLiving.class.isAssignableFrom(entry.getKey())) {
 				entityList.add(entry.getValue());

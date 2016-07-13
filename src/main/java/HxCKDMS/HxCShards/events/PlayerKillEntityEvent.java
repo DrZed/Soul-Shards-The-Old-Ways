@@ -1,5 +1,6 @@
 package HxCKDMS.HxCShards.events;
 
+import HxCKDMS.HxCCore.Configs.Configurations;
 import HxCKDMS.HxCCore.api.Utils.LogHelper;
 import HxCKDMS.HxCShards.utils.*;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -17,31 +18,33 @@ public class PlayerKillEntityEvent {
 
 	@SubscribeEvent
 	public void onEntityKill(LivingDeathEvent event) {
-        if ((event.source.getEntity() instanceof EntityPlayerMP) && !(event.entityLiving instanceof EntityPlayer)) {
+        if ((event.source.getEntity() instanceof EntityPlayerMP) && !(event.entityLiving instanceof EntityPlayer) && event.entityLiving instanceof EntityLiving) {
             World world = event.entity.worldObj;
+            EntityLiving victim = (EntityLiving) event.entityLiving;
+            EntityPlayerMP player = (EntityPlayerMP) event.source.getEntity();
 
-            if (world.isRemote || !(event.source.getEntity() instanceof EntityPlayer)) {
+            if (Configurations.DebugMode)
+                LogHelper.warn("Victim : " + victim.getCommandSenderName() + " | " + victim.getClass().getTypeName() + " | " + victim.getClass().getName()
+                        + " | " + victim.getClass().getCanonicalName() + " | " + victim.getClass().getSimpleName() + "\n Player : " +
+                        player.getDisplayName() + " | " + player.getHeldItem().getUnlocalizedName(), Reference.modName);
+
+            if (world.isRemote)
+                return;
+
+            String entName = "";
+			try {
+				entName = EntityList.getEntityString(victim);
+			} catch (Exception e) {
+                LogHelper.error(victim.getCommandSenderName() + " Failed to find in wList or not in EntityList", Reference.modName);
+				e.printStackTrace();
+			}
+
+            if (entName.isEmpty() || (!Entitylist.wList.keySet().contains(entName) || !Entitylist.wList.get(entName)) || !EntityMapper.isEntityValid(entName)) {
+                LogHelper.error(victim.getCommandSenderName() + " Failed to find in wList or not in EntityList", Reference.modName);
                 return;
             }
 
-            EntityLiving dead = (EntityLiving) event.entity;
-            EntityPlayer player = (EntityPlayer) event.source.getEntity();
-            String entName = EntityList.getEntityString(dead);
-            if (!Entitylist.wList.keySet().contains(entName) && !Entitylist.wList.get(entName)) {
-                return;
-            }
-
-            if (entName == null || entName.isEmpty()) {
-                LogHelper.debug(Utils.localizeFormatted("chat.hxcshards.debug.nounlocname", "" + dead), Reference.modName);
-                return;
-            }
-
-            if (!EntityMapper.isEntityValid(entName)) {
-                return;
-            }
-
-            if (dead instanceof EntitySkeleton
-                    && ((EntitySkeleton) dead).getSkeletonType() == 1) {
+            if (victim instanceof EntitySkeleton && ((EntitySkeleton) victim).getSkeletonType() == 1) {
                 entName = "Wither Skeleton";
             }
 
@@ -50,13 +53,13 @@ public class PlayerKillEntityEvent {
             if (shard != null) {
                 if (!Utils.isShardBound(shard)) {
                     Utils.setShardBoundEnt(shard, entName);
-                    Utils.writeEntityHeldItem(shard, dead);
+                    Utils.writeEntityHeldItem(shard, victim);
                     Utils.setShardBoundPlayer(shard, player);
                 }
-                Utils.writeEntityArmor(shard, dead);
 
-                int soulStealer = EnchantmentHelper.getEnchantmentLevel(
-                        ModRegistry.SOUL_STEALER.effectId, player.getHeldItem());
+                Utils.writeEntityArmor(shard, victim);
+
+                int soulStealer = EnchantmentHelper.getEnchantmentLevel(ModRegistry.SOUL_STEALER.effectId, player.getHeldItem());
                 soulStealer *= Configs.enchantBonus;
 
                 Utils.increaseShardKillCount(shard, (byte) (1 + soulStealer));
