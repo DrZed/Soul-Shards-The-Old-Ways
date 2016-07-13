@@ -2,6 +2,7 @@ package HxCKDMS.HxCShards.events;
 
 import HxCKDMS.HxCCore.Configs.Configurations;
 import HxCKDMS.HxCCore.api.Utils.LogHelper;
+import HxCKDMS.HxCShards.HxCShards;
 import HxCKDMS.HxCShards.utils.*;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -35,12 +36,20 @@ public class PlayerKillEntityEvent {
 			try {
 				entName = EntityList.getEntityString(victim);
 			} catch (Exception e) {
-                LogHelper.error(victim.getCommandSenderName() + " Failed to find in wList or not in EntityList", Reference.modName);
+                LogHelper.debug(victim.getCommandSenderName() + " Failed to find in wList or not in EntityList", Reference.modName);
+                if (!HxCShards.logDump.containsKey(victim.getCommandSenderName()))
+                    HxCShards.logDump.putIfAbsent(victim.getCommandSenderName(), "Victim : " + victim.getCommandSenderName() + " | " + victim.getClass().getTypeName() + " | " + victim.getClass().getName()
+                    + " | " + victim.getClass().getCanonicalName() + " | " + victim.getClass().getSimpleName() + " Player : " +
+                    player.getDisplayName() + " | " + player.getHeldItem().getUnlocalizedName());
 				e.printStackTrace();
 			}
 
             if (entName.isEmpty() || (!Entitylist.wList.keySet().contains(entName) || !Entitylist.wList.get(entName)) || !EntityMapper.isEntityValid(entName)) {
-                LogHelper.error(victim.getCommandSenderName() + " Failed to find in wList or not in EntityList", Reference.modName);
+                if (!HxCShards.logDump.containsKey(victim.getCommandSenderName()))
+                    HxCShards.logDump.putIfAbsent(victim.getCommandSenderName(), "Victim : " + victim.getCommandSenderName() + " | " + victim.getClass().getTypeName() + " | " + victim.getClass().getName()
+                    + " | " + victim.getClass().getCanonicalName() + " | " + victim.getClass().getSimpleName() + " Player : " +
+                    player.getDisplayName() + " | " + player.getHeldItem().getUnlocalizedName());
+                LogHelper.debug(victim.getCommandSenderName() + " Failed to find in wList or not in EntityList", Reference.modName);
                 return;
             }
 

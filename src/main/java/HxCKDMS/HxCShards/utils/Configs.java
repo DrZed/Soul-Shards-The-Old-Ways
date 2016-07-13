@@ -6,21 +6,16 @@ import java.util.HashMap;
 
 @Config
 public class Configs {
-	// Enchant Section
-	public static int enchantID = 52, enchantWeight = 8, enchantBonus = 1;
+	public static int enchantID = 52, enchantWeight = 8, enchantBonus = 1, spawnerBonus = 64,
+            maxEntities = 80, tier1Kills = 64;
 
-	// General Section
-	public static int spawnerBonus = 64;
-	public static boolean allowAbsorb = true, bindingAbsorb, debug, personalShard, unbreakableSoulSpawner;
+	public static boolean allowAbsorb = true, bindingAbsorb, debug, personalShard, invertRedstone,
+            absorbAnySpawner, useSSTOWTextures, floodPrevention = true, BossMobShards = true;
 
-	// Soul Cage
-	public static int maxEntities = 80;
-	public static boolean invertRedstone, absorbAnySpawner, useSSTOWTextures, floodPrevention = true, BossMobShards = true;
+	public static byte numtiers = 16, maxspawns = 8, maxDelay = 120, delayMultiplier = 20,
+            spawnrange = 4, enchantMaxLevel = 5;
 
-	// Recipes Section
-	public static int cookingModifier = 10, tier1Kills = 64;
-
-	public static byte numtiers = 16, maxspawns = 8, maxDelay = 120, delayMultiplier = 20, spawnrange = 4, enchantMaxLevel = 5;
+    public static float lightPercent = 0.25f, worldPercent = 0.75f, playerPercent = 0.5f, redstonePercent = 0.25f;
 
     @Config.ignore
 	public static HashMap<String, Tier> tiers = new HashMap<>();
@@ -49,13 +44,13 @@ public class Configs {
 
 	public static Tier newTier(int KillsRequired, float percent) {
 		Tier t = new Tier();
-		t.Delay = (byte)((maxDelay - (percent * maxDelay)) + 1);
+		t.Delay = (byte)(Math.round(maxDelay * (1-percent)) + 1);
 		t.Kills = KillsRequired;
-		t.LightCheck = percent < 0.3f;
-		t.WorldCheck = percent < 0.7f;
+		t.LightCheck = percent < lightPercent;
+		t.WorldCheck = percent < worldPercent;
 		t.Spawns = ((byte)(percent * maxspawns) >= 1 ? (byte)(percent * maxspawns) : 1);
-		t.PlayerCheck = percent < 0.5f;
-		t.Redstone = percent > 0.6f;
+		t.PlayerCheck = percent < playerPercent;
+		t.Redstone = percent > redstonePercent;
 		return t;
 	}
 }

@@ -163,12 +163,9 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
             itemCookTime = 0;
         } else if (itemCookTime > 0) {
             progress++;
-        } else if (fuelTime > 0 || isItemFuel(getStackInSlot(1))) {
+        } else {
             itemCookTime = ModRegistry.sFHandler.getSmeltingTime(getStackInSlot(0));
             progress = 0;
-            fuelTime = ModRegistry.sFHandler.getFuelBurnTime(getStackInSlot(1));
-            decrStackSize(1, 1);
-            fuelTime2 = fuelTime;
         }
 	}
 

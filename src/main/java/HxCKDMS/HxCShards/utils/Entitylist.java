@@ -11,6 +11,6 @@ public class Entitylist {
 
 	public void init() {
 		Iterator<String> iter = EntityMapper.entityList.iterator();
-		iter.forEachRemaining(i -> wList.put(i, true));
+		iter.forEachRemaining(i -> wList.putIfAbsent(i, true));
 	}
 }

@@ -42,6 +42,7 @@ public class HxCShards {
 	public static Entitylist elist;
     public static HxCConfig config, entlist;
     public static HashMap<String, TileEntityCage> spawners = new HashMap<>();
+    public static HashMap<String, String> logDump = new HashMap<>();
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {}

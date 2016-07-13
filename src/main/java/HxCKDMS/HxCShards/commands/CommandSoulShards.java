@@ -1,5 +1,6 @@
 package HxCKDMS.HxCShards.commands;
 
+import HxCKDMS.HxCCore.HxCCore;
 import HxCKDMS.HxCShards.HxCShards;
 import HxCKDMS.HxCShards.utils.ModRegistry;
 import HxCKDMS.HxCShards.utils.TierHandler;
@@ -107,6 +108,9 @@ public class CommandSoulShards extends CommandBase {
                     } else {
                         HxCShards.spawners.values().forEach(b -> b.getWorld().breakBlock(b.xCoord, b.yCoord, b.zCoord, true));
                     }
+                    break;
+                case "logdump":
+                    HxCShards.logDump.values().forEach(b -> HxCCore.instance.logCommand(b));
                     break;
                 default:
                     sender.addChatMessage(new ChatComponentText(Utils.localize("chat.hxcshards.command.killall")));
