@@ -103,14 +103,17 @@ public class CommandSoulShards extends CommandBase {
                     if (params.length == 2) {
                         HxCShards.spawners.forEach((creator, spawner) -> {
                             if (params[1].equalsIgnoreCase(creator))
-                                spawner.getWorld().breakBlock(spawner.xCoord, spawner.yCoord, spawner.zCoord, true);
+                                spawner.getWorldObj().func_147480_a(spawner.xCoord, spawner.yCoord, spawner.zCoord, true);
                         });
                     } else {
-                        HxCShards.spawners.values().forEach(b -> b.getWorld().breakBlock(b.xCoord, b.yCoord, b.zCoord, true));
+                        HxCShards.spawners.values().forEach(b -> b.getWorldObj().func_147480_a(b.xCoord, b.yCoord, b.zCoord, true));
                     }
                     break;
                 case "logdump":
                     HxCShards.logDump.values().forEach(b -> HxCCore.instance.logCommand(b));
+                    break;
+                case "logdumpclient":
+                    HxCShards.logDump.values().forEach(b -> sender.addChatMessage(new ChatComponentText(b)));
                     break;
                 default:
                     sender.addChatMessage(new ChatComponentText(Utils.localize("chat.hxcshards.command.killall")));

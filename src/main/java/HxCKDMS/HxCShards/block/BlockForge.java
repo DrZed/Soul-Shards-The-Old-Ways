@@ -36,8 +36,8 @@ public class BlockForge extends BlockContainer {
 
 	public BlockForge() {
 		super(Material.rock);
-		this.setUnlocalizedName(Reference.modID + ".block.forge");
-		this.setHardness(3.5F);
+		setBlockName(Reference.modID + ".block.forge");
+		setHardness(3.5F);
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class BlockForge extends BlockContainer {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconRegister) {
+	public void registerBlockIcons(IIconRegister iconRegister) {
         front = new IIcon[2];
 		if (HolidayHelper.isHalloween()) {
 			this.blockIcon = iconRegister.registerIcon("minecraft:pumpkin_side");
@@ -155,7 +155,7 @@ public class BlockForge extends BlockContainer {
 									(double) ((float) y + f1),
 									(double) ((float) z + f2), new ItemStack(
 											itemstack.getItem(), j,
-											itemstack.getCurrentDurability()));
+											itemstack.getItemDamage()));
 
 							if (itemstack.hasTagCompound()) {
 								itemEntity.getEntityItem().setTagCompound(
@@ -173,7 +173,7 @@ public class BlockForge extends BlockContainer {
 						}
 					}
 				}
-				world.updateNeighborsAboutBlockChange(x, y, z, block);
+				world.func_147453_f(x, y, z, block);
 			}
 		}
 		super.breakBlock(world, x, y, z, block, meta);

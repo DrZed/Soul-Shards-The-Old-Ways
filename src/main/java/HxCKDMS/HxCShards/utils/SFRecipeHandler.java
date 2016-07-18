@@ -35,7 +35,7 @@ public class SFRecipeHandler {
         else if (fuel != null) {
             fuelList.keySet().forEach(f -> {
                 if (f.getItem() == fuel.getItem() &&
-                        f.getMetadata() == fuel.getMetadata() &&
+                        f.getItemDamage() == fuel.getItemDamage() &&
                         f.getUnlocalizedName().equals(fuel.getUnlocalizedName()))
                     t[0] = fuelList.get(f);
             });
@@ -68,7 +68,7 @@ public class SFRecipeHandler {
         public ItemStack getOutput(ItemStack stack) {
             if (stack.getItem() == input.getItem() &&
                     stack.getUnlocalizedName().equals(input.getUnlocalizedName()) &&
-                    stack.getMetadata() == input.getMetadata())
+                    stack.getItemDamage() == input.getItemDamage())
             return output;
             return null;
         }

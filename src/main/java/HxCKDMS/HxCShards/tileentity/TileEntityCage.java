@@ -16,7 +16,6 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.world.World;
 
 import java.util.List;
 
@@ -42,11 +41,6 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 		updateCounter = 0;
 		redstoneActive = false;
 		active = false;
-	}
-
-	@Override
-	public World getWorld() {
-		return worldObj;
 	}
 
 	@Override
@@ -123,7 +117,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 				toSpawn[i].getEntityData().setBoolean("SoulShard", true);
 				toSpawn[i].forceSpawn = true;
-				toSpawn[i].enablePersistence();
+				toSpawn[i].func_110163_bv();
 			}
 			spawnEntities(toSpawn);
 			counter = 0;
@@ -237,7 +231,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 			nbt.setTag("Slot" + 0, tag);
 		}
 
-		if (this.isCustomInventoryName())
+		if (this.hasCustomInventoryName())
 			nbt.setString("CustomName", this.cageName);
 
 		nbt.setBoolean("active", active);
@@ -286,11 +280,11 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 	@Override
 	public String getInventoryName() {
-		return this.isCustomInventoryName() ? this.cageName : "container.soulcage";
+		return this.hasCustomInventoryName() ? this.cageName : "container.soulcage";
 	}
 
-	@Override
-	public boolean isCustomInventoryName() {
+    @Override
+	public boolean hasCustomInventoryName() {
 		return this.cageName != null && this.cageName.length() > 0;
 	}
 
@@ -305,11 +299,11 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 				(double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
 	}
 
-	@Override
-	public void openChest() { }
+    @Override
+    public void openInventory() {}
 
-	@Override
-	public void closeChest() { }
+    @Override
+    public void closeInventory() {}
 
 	public byte getTier() {
 		return tier;
@@ -326,9 +320,9 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
-		readFromNBT(pkt.getNbtCompound());
-        delay = pkt.getNbtCompound().getInteger("delay");
-        counter = pkt.getNbtCompound().getInteger("counter");
+		readFromNBT(pkt.func_148857_g());
+        delay = pkt.func_148857_g().getInteger("delay");
+        counter = pkt.func_148857_g().getInteger("counter");
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
@@ -342,11 +336,11 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 	}
 
 	@Override
-	public int[] getSlotsForFace(int face) {
+	public int[] getAccessibleSlotsFromSide(int face) {
 		return new int[]{slot};
 	}
 
-	@Override
+    @Override
 	public boolean canInsertItem(int slot, ItemStack stack, int size) {
 		return isItemValidForSlot(slot, stack);
 	}

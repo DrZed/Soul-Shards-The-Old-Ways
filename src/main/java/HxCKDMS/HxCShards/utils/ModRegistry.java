@@ -27,14 +27,10 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-
-import java.util.Iterator;
-import java.util.Map;
 
 public class ModRegistry {
 	// Tool material for the soul tools/sword
@@ -69,9 +65,6 @@ public class ModRegistry {
 		registerBlocks();
 		registerOreDictEntries();
 		registerTileEntities();
-		if (Loader.isModLoaded("Natura")) {
-			removeRecipes();
-		}
 		registerRecipes();
         sFHandler = new SFRecipeHandler();
         registerSoulForgeRecipes();
@@ -116,7 +109,9 @@ public class ModRegistry {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.iron_ingot), "AAA", "AAA", "AAA", 'A', "nuggetIron"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockMaterials, 1, 0), "AAA", "AAA", "AAA", 'A', "ingotSoulium"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockCage), "SIS", "IXI", "SIS", 'I', Blocks.iron_bars, 'S', "ingotSoulium"));
-		GameRegistry.addSmelting(Blocks.soul_sand, new ItemStack(ItemMaterials, 1, 3), 0.35F);
+
+        if (!Loader.isModLoaded("Natura"))
+		    GameRegistry.addSmelting(Blocks.soul_sand, new ItemStack(ItemMaterials, 1, 3), 0.35F);
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSwordSoul), "A", "A", "B", 'A', "ingotSoulium", 'B', "ingotIron"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemPickaxeSoul), "AAA", "CBC", "CBC", 'A', "ingotSoulium", 'B', "ingotIron"));
@@ -124,23 +119,11 @@ public class ModRegistry {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSpadeSoul), "A", "B", "B", 'A', "ingotSoulium", 'B', "ingotIron"));
 	}
 
-	@SuppressWarnings("unchecked")
-	private static void removeRecipes() {
-		for (Iterator<Map.Entry<ItemStack, ItemStack>> 
-		itr = FurnaceRecipes.instance().getSmeltingList().entrySet().iterator(); itr.hasNext();){
-			Map.Entry<ItemStack, ItemStack> entry = itr.next();
-			if (entry.getKey().isItemEqual(new ItemStack(Blocks.soul_sand))) {
-				itr.remove();
-                LogHelper.debug(": Changed Soul Sand Smelting Recipe(s)", Reference.modName);
-				GameRegistry.addSmelting(new ItemStack(ItemMaterials, 1, 3), entry.getValue(), 0.3f);
-				break; 
-			}
-		}
-	}
-
 
     private static void registerSoulForgeRecipes() {
         sFHandler.addFuel(new ItemStack(ItemMaterials, 1, 3), 900);
+        sFHandler.addFuel(new ItemStack(Items.coal, 1, 1), 250);
+        sFHandler.addFuel(new ItemStack(Items.coal, 1, 0), 250);
         sFHandler.addRecipe(new ItemStack(ItemSoulShard), new ItemStack(Items.diamond), 24000);
         sFHandler.addRecipe(new ItemStack(ItemSoulShard, 9), new ItemStack(Blocks.diamond_block), 24000*9);
         sFHandler.addRecipe(new ItemStack(ItemMaterials, 1, 1), new ItemStack(Items.gold_nugget), 200);

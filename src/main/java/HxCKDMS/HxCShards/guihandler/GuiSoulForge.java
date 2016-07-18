@@ -27,7 +27,7 @@ public class GuiSoulForge extends GuiContainer {
 	}
 
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-		String string = tileFurnace.isCustomInventoryName() ? tileFurnace.getInventoryName() :
+		String string = tileFurnace.hasCustomInventoryName() ? tileFurnace.getInventoryName() :
                 I18n.format(tileFurnace.getInventoryName());
 		fontRendererObj.drawString(string, xSize / 2 - fontRendererObj.getStringWidth(string), 6, 4210752);
 		fontRendererObj.drawString( I18n.format("container.inventory"), 8, ySize - 94, 4210752);

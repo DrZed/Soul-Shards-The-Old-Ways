@@ -36,7 +36,7 @@ public class ItemMaterials extends Item {
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
-        return getUnlocalizedName() + "." + names[stack.getCurrentDurability() % names.length];
+        return getUnlocalizedName() + "." + names[stack.getItemDamage() % names.length];
     }
 
     @SideOnly(Side.CLIENT)

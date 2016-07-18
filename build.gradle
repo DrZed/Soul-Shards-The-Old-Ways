@@ -15,7 +15,7 @@ apply plugin: 'forge'
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-def build_number = '4'
+def build_number = '5'
 
 if (System.getenv('BUILD_NUMBER') != null)
     build_number = System.getenv('BUILD_NUMBER')
@@ -27,7 +27,7 @@ version = "${mc_version}-${mod_version}-${build_number}"
 repositories {
 	maven { url "http://tehnut.info/maven/" }
 	maven { url "http://chickenbones.net/maven/" }
-	maven {	url "http://mobiusstrip.eu/maven" }
+	//maven {	url "http://mobiusstrip.eu/maven" }
     maven { url 'http://dvs1.progwml6.com/files/maven' }
 }
 
@@ -66,10 +66,10 @@ processResources {
 
 jar {
     manifest.mainAttributes(
-            "Built-By": System.getProperty('user.name'),
-            "Created-By": "${System.getProperty('java.vm.version')} + (${System.getProperty('java.vm.vendor')})",
-            "Implementation-Title": project.name,
-            "Implementation-Version": project.version
+		"Built-By": System.getProperty('user.name'),
+		"Created-By": "${System.getProperty('java.vm.version')} + (${System.getProperty('java.vm.vendor')})",
+		"Implementation-Title": project.name,
+		"Implementation-Version": project.version
     )
 }
 

@@ -30,7 +30,7 @@ public class BlockCage extends BlockContainer {
 
 	public BlockCage() {
 		super(Material.iron);
-		setUnlocalizedName(Reference.modID + ".cage");
+		setBlockName(Reference.modID + ".cage");
 		setCreativeTab(ModRegistry.CREATIVE_TAB);
 		blockHardness = 3.0F;
 		blockResistance = 3.0F;
@@ -133,7 +133,7 @@ public class BlockCage extends BlockContainer {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconRegister) {
+	public void registerBlockIcons(IIconRegister iconRegister) {
 		icons[0] = iconRegister.registerIcon(Reference.modID + ":soulCage");
         icons[1] = iconRegister.registerIcon(Reference.modID + ":soulCageOn");
 	}

@@ -74,7 +74,7 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
     }
 
     @Override
-    public boolean isCustomInventoryName() {
+    public boolean hasCustomInventoryName() {
         return false;
     }
 
@@ -179,10 +179,10 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
 	}
 
 	@Override
-	public void openChest() {}
+	public void openInventory() {}
 
 	@Override
-	public void closeChest() {}
+	public void closeInventory() {}
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
@@ -190,8 +190,8 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
                 (slot == 0 && ModRegistry.sFHandler.getSmeltingResult(itemstack) != null) || slot == 2);
 	}
 
-	@Override
-	public int[] getSlotsForFace(int face) {
+    @Override
+	public int[] getAccessibleSlotsFromSide(int face) {
 		return face == 0 ? slotsBottom : (face == 1 ? slotsTop : slotsSides);
 	}
 

@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -36,16 +37,22 @@ public class RenderSoulCage extends TileEntitySpecialRenderer {
 		if(stack != null) {
 			if(stack.getItem() instanceof ItemSoulShard) {
                 Entity mob = EntityList.createEntityByName(Utils.getShardBoundEnt(stack), mc.theWorld);
-				float f1 = 0.4375F;
-				GL11.glTranslatef(0.0F, 0.4F, 0.0F);
-				GL11.glRotatef(20F, 0F, 0F, 1F);
-                if(TECage.getBlockMetadata() == 1)
-					GL11.glRotatef(Minecraft.getSystemTime() / -10, 0F, 1F, 0F);
-				GL11.glRotatef(-20F, 1F, 0F, 0F);
-				GL11.glTranslatef(0.0F, -0.4F, 0.0F);
-				GL11.glScalef(f1, f1, f1);
-				mob.setLocationAndAngles(x, y, z, 0.0F, 0.0F);
-				RenderManager.instance.renderEntityWithPosYaw(mob, 0, 0, 0, 0F, 1F);
+                if (Utils.getShardBoundEnt(stack).equals("Wither Skeleton")) {
+                    mob = EntityList.createEntityByName("Skeleton", mc.theWorld);
+                    ((EntitySkeleton)mob).setSkeletonType(1);
+                }
+				if (mob != null) {
+					float f1 = 0.4375F;
+					GL11.glTranslatef(0.0F, 0.4F, 0.0F);
+					GL11.glRotatef(20F, 0F, 0F, 1F);
+					if(TECage.getBlockMetadata() == 1)
+						GL11.glRotatef(Minecraft.getSystemTime() / -10, 0F, 1F, 0F);
+					GL11.glRotatef(-20F, 1F, 0F, 0F);
+					GL11.glTranslatef(0.0F, -0.4F, 0.0F);
+					GL11.glScalef(f1, f1, f1);
+					mob.setLocationAndAngles(x, y, z, 0.0F, 0.0F);
+					RenderManager.instance.renderEntityWithPosYaw(mob, 0, 0, 0, 0F, 1F);
+				}
 			}
 		}
 	}

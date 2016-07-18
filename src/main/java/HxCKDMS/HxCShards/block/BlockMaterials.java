@@ -17,10 +17,10 @@ import java.util.List;
 public class BlockMaterials extends Block {
 	public BlockMaterials() {
 		super(Material.iron);
-		this.setUnlocalizedName(Reference.modID + ".block.material");
-		this.setCreativeTab(ModRegistry.CREATIVE_TAB);
-		this.blockHardness = 3.0F;
-		this.blockResistance = 3.0F;
+		setBlockName(Reference.modID + ".block.material");
+		setCreativeTab(ModRegistry.CREATIVE_TAB);
+		blockHardness = 3.0F;
+		blockResistance = 3.0F;
 	}
 
 	public static final String[] names = new String[] { 
@@ -37,7 +37,7 @@ public class BlockMaterials extends Block {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister iconRegister) {
+	public void registerBlockIcons(IIconRegister iconRegister) {
         blockIcon = iconRegister.registerIcon(Reference.modID + ":block" + names[0]);
 	}
 

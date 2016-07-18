@@ -12,9 +12,9 @@ public class Configs {
             maxEntities = 80, tier1Kills = 64;
 
 	public static boolean allowAbsorb = true, bindingAbsorb, debug, personalShard, invertRedstone,
-            absorbAnySpawner, useSSTOWTextures, floodPrevention = true, BossMobShards = true;
+            absorbAnySpawner, useSSTOWTextures, floodPrevention = true, BossMobShards = true, newColors;
 
-	public static byte numtiers = 16, maxspawns = 8, maxDelay = 120, delayMultiplier = 20,
+	public static byte numtiers = 5, maxspawns = 8, maxDelay = 120, delayMultiplier = 20,
             spawnrange = 4, enchantMaxLevel = 5;
 
     public static float lightPercent = 0.25f, worldPercent = 0.75f, playerPercent = 0.5f, redstonePercent = 0.25f;

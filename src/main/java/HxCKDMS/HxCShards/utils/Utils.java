@@ -39,7 +39,7 @@ public final class Utils {
 
 			ItemStack newShard = new ItemStack(ModRegistry.ItemSoulShard, 1);
 
-			for (int slot = 0; slot < player.getInventory().length; slot++) {
+			for (int slot = 0; slot < player.inventory.mainInventory.length; slot++) {
 				if (player.inventory.getStackInSlot(slot) == null) {
 					player.inventory.addItemStackToInventory(newShard);
 					return newShard;
@@ -111,7 +111,7 @@ public final class Utils {
 			shard.setTagCompound(new NBTTagCompound());
 		}
 
-        shard.setMetadata(MathHelper.clamp_int(tier, 0, Configs.numtiers));
+        shard.setItemDamage(MathHelper.clamp_int(tier, 0, Configs.numtiers));
 		shard.stackTagCompound.setByte("Tier", (byte) MathHelper.clamp_int(tier, 0, Configs.numtiers));
 	}
 
@@ -228,7 +228,7 @@ public final class Utils {
 
 	public static void setShardBoundPlayer(ItemStack shard, EntityPlayer player) {
 		shard.stackTagCompound.setString("owner", player.getDisplayName());
-        shard.setMetadata(MathHelper.clamp_int(getShardTier(shard), 0, Configs.numtiers));
+        shard.setItemDamage(MathHelper.clamp_int(getShardTier(shard), 0, Configs.numtiers));
 	}
 
 	public static String getShardBoundPlayer(ItemStack shard) {

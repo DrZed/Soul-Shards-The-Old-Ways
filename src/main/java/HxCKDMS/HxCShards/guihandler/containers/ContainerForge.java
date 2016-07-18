@@ -34,14 +34,14 @@ public class ContainerForge extends Container {
 			addSlotToContainer(new Slot(inv, i, 8 + i * 18, 142));
 	}
 
-	@Override
-	public void onCraftGuiOpened(ICrafting craft) {
-		super.onCraftGuiOpened(craft);
+    @Override
+    public void addCraftingToCrafters(ICrafting craft) {
+        super.addCraftingToCrafters(craft);
         craft.sendProgressBarUpdate(this, 0, tileFurnace.progress);
         craft.sendProgressBarUpdate(this, 1, tileFurnace.itemCookTime);
-		craft.sendProgressBarUpdate(this, 2, tileFurnace.fuelTime2);
-		craft.sendProgressBarUpdate(this, 3, tileFurnace.fuelTime);
-	}
+        craft.sendProgressBarUpdate(this, 2, tileFurnace.fuelTime2);
+        craft.sendProgressBarUpdate(this, 3, tileFurnace.fuelTime);
+    }
 
     @SuppressWarnings("unchecked")
 	public void detectAndSendChanges() {

@@ -20,7 +20,7 @@ public class CreateShardEvent {
 		}
 
 		if (event.entityPlayer.getHeldItem() == null
-				|| event.entityPlayer.getHeldItem().getCurrentDurability() != 0
+				|| event.entityPlayer.getHeldItem().getItemDamage() != 0
 				|| !event.entityPlayer.isSneaking()) {
 			return;
 		}
@@ -34,7 +34,7 @@ public class CreateShardEvent {
 				event.entityPlayer.getHeldItem().stackSize--;
 			}
 
-			event.world.breakBlock(event.x, event.y, event.z, false);
+			event.world.func_147480_a(event.x, event.y, event.z, false);
 
 			ForgeDirection dir = ForgeDirection.getOrientation(event.face);
 

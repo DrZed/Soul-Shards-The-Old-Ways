@@ -16,7 +16,7 @@ public class ItemBlockForge extends ItemBlock {
 
 	public ItemBlockForge(Block block) {
 		super(block);
-		setMaxDurability(0);
+		setMaxDamage(0);
 		setHasSubtypes(true);
 	}
 

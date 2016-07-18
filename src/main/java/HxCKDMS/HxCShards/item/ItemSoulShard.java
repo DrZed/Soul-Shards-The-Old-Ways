@@ -27,7 +27,7 @@ public class ItemSoulShard extends Item {
     public ItemSoulShard() {
 		this.setCreativeTab(ModRegistry.CREATIVE_TAB);
 		this.setMaxStackSize(64);
-		this.setMaxDurability(0);
+		this.setMaxDamage(0);
 	}
 
     @Override
@@ -101,7 +101,7 @@ public class ItemSoulShard extends Item {
 				return stack;
 			}
 
-			ent = ((TileEntityMobSpawner) tile).func_145881_a().spawnEntity(ent);
+			ent = ((TileEntityMobSpawner) tile).func_145881_a().func_98265_a(ent);
 
 			if (ent instanceof EntitySkeleton && ((EntitySkeleton) ent).getSkeletonType() == 1) {
 				name = "Wither Skeleton";
@@ -115,7 +115,7 @@ public class ItemSoulShard extends Item {
 				if (Configs.absorbAnySpawner || Utils.getShardBoundEnt(stack).equals(name)) {
 					Utils.increaseShardKillCount(stack, (byte) Configs.spawnerBonus);
 //					Utils.checkForAchievements(player, stack);
-					world.breakBlock(mop.blockX, mop.blockY, mop.blockZ, false);
+					world.func_147480_a(mop.blockX, mop.blockY, mop.blockZ, false);
 				}
 			} else if (EntityMapper.isEntityValid(name)) {
 				if (stack.stackSize > 1) {
@@ -139,7 +139,7 @@ public class ItemSoulShard extends Item {
 						}
 						counter++;
 					}
-					world.breakBlock(mop.blockX, mop.blockY, mop.blockZ, true);
+					world.func_147480_a(mop.blockX, mop.blockY, mop.blockZ, true);
 					if (!emptySpot) {
 						player.worldObj.spawnEntityInWorld(new EntityItem(
 								player.worldObj, player.posX, player.posY,
@@ -209,10 +209,16 @@ public class ItemSoulShard extends Item {
 
     @Override
     public int getColorFromItemStack(ItemStack shard, int renderpass) {
-        float percentile = (float)shard.getMetadata() / (float)Configs.numtiers;
-        if (percentile < 0.5f)
-            return new Color(1-percentile, 0f, 1-percentile).getRGB();
-        else return new Color(percentile - 0.15f, 0f, 0f).getRGB();
+        if (Configs.newColors && Configs.numtiers > 10) {
+            float percentile = (float) shard.getItemDamage() / (float) Configs.numtiers;
+            if (percentile < 0.5f)
+                return new Color(1 - percentile, 0f, 1 - percentile).getRGB();
+            else return new Color(percentile - 0.15f, 0f, 0f).getRGB();
+        } else {
+            float percentile = (float) shard.getItemDamage() / (float) Configs.numtiers;
+
+            return new Color(Math.max(Math.min(percentile, 0.9f), 0.45f), 0f, Math.max(Math.min(percentile, 0.9f), 0.45f)).getRGB();
+        }
     }
 
     @Override
