@@ -27,7 +27,7 @@ version = "${mc_version}-${mod_version}-${build_number}"
 repositories {
 	maven { url "http://tehnut.info/maven/" }
 	maven { url "http://chickenbones.net/maven/" }
-	//maven {	url "http://mobiusstrip.eu/maven" }
+	maven {	url "http://mobiusstrip.eu/maven" }
     maven { url 'http://dvs1.progwml6.com/files/maven' }
 }
 
