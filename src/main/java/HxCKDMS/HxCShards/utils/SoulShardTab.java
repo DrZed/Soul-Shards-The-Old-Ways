@@ -16,8 +16,8 @@ public class SoulShardTab extends CreativeTabs {
 	public ItemStack getIconItemStack() {
 		ItemStack shard = new ItemStack(ModRegistry.ItemSoulShard);
 
-		Utils.setShardTier(shard, Configs.numtiers);
-		Utils.setShardKillCount(shard, TierHandler.getMaxKills(Configs.numtiers));
+		Utils.setShardTier(shard, (byte)Configs.tiers.size());
+		Utils.setShardKillCount(shard, TierHandler.getMaxKills((byte) (Configs.tiers.size()-1)));
 		Utils.setShardBoundEnt(shard, "NULL");
 
 		return shard;

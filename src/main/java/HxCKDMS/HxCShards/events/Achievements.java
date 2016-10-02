@@ -25,14 +25,14 @@ public class Achievements {
 
 		shards[0] = new Achievement("achievement.createShard", "createShard", 4, 1, s0, soulforge).registerStat();
 
-		ItemStack sx = new ItemStack(ModRegistry.ItemSoulShard, Configs.numtiers);
-		Utils.setShardTier(sx, Configs.numtiers);
+		ItemStack sx = new ItemStack(ModRegistry.ItemSoulShard, Configs.tiers.size());
+		Utils.setShardTier(sx, (byte) Configs.tiers.size());
 		Utils.setShardBoundEnt(sx, "NULL");
 
-        if (Configs.numtiers > 15)
+        if (Configs.tiers.size() > 15)
 		    shards[16] = new Achievement("achievement.shard_tier_X", "shard_tier_X", 2 * 16, -2 * 16, sx, shards[15]).registerStat();
 
-		for (byte tier = 1; tier < Configs.numtiers; tier++) {
+		for (byte tier = 1; tier < Configs.tiers.size(); tier++) {
             if (tier > 15) break;
 			ItemStack shard = new ItemStack(ModRegistry.ItemSoulShard, tier);
 			Utils.setShardTier(shard, tier);

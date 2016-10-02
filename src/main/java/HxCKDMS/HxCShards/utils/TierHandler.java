@@ -48,7 +48,7 @@ public final class TierHandler {
 	public static byte getCorrectTier(ItemStack shard) {
 		int kills = Utils.getShardKillCount(shard);
 
-		for (byte i = 0; i <= Configs.numtiers; i++)
+		for (byte i = 0; i <= Configs.tiers.size(); i++)
 			if (kills >= getMinKills(i) && kills <= getMaxKills(i))
                 return i;
 

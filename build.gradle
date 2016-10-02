@@ -1,3 +1,5 @@
+import scala.tools.nsc.io.Jar
+
 buildscript {
     repositories {
         mavenCentral()
@@ -15,7 +17,7 @@ apply plugin: 'forge'
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-def build_number = '5'
+def build_number = '6'
 
 if (System.getenv('BUILD_NUMBER') != null)
     build_number = System.getenv('BUILD_NUMBER')
@@ -33,7 +35,7 @@ repositories {
 
 dependencies {
 	compile "mcp.mobius.waila:Waila:${waila_version}_${mc_version}:dev"
-	//compile "codechicken:CodeChickenLib:${mc_version}-${ccl_version}:dev"
+//	compile "codechicken:CodeChickenLib:${mc_version}-${ccl_version}:dev"
 	compile "codechicken:CodeChickenCore:${mc_version}-${ccc_version}:dev"
 	compile "codechicken:NotEnoughItems:${mc_version}-${nei_version}:dev"
 	compile fileTree(dir: 'libs', include: ['*jar'])

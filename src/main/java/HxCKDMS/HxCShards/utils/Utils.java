@@ -103,7 +103,7 @@ public final class Utils {
 		if (!shard.hasTagCompound()) {
 			return 0;
 		}
-		return (byte) MathHelper.clamp_int(shard.stackTagCompound.getByte("Tier"), 0, Configs.numtiers);
+		return (byte) MathHelper.clamp_int(shard.stackTagCompound.getByte("Tier"), 0, Configs.tiers.size());
 	}
 
 	public static void setShardTier(ItemStack shard, byte tier) {
@@ -111,8 +111,8 @@ public final class Utils {
 			shard.setTagCompound(new NBTTagCompound());
 		}
 
-        shard.setItemDamage(MathHelper.clamp_int(tier, 0, Configs.numtiers));
-		shard.stackTagCompound.setByte("Tier", (byte) MathHelper.clamp_int(tier, 0, Configs.numtiers));
+        shard.setItemDamage(MathHelper.clamp_int(tier, 0, Configs.tiers.size()));
+		shard.stackTagCompound.setByte("Tier", (byte) MathHelper.clamp_int(tier, 0, Configs.tiers.size()));
 	}
 
 	/*
@@ -141,7 +141,7 @@ public final class Utils {
 	}
 
 	public static boolean hasMaxedKills(ItemStack shard) {
-		return isShardBound(shard) && getShardKillCount(shard) >= TierHandler.getMaxKills(Configs.numtiers);
+		return isShardBound(shard) && getShardKillCount(shard) >= TierHandler.getMaxKills((byte) (Configs.tiers.size() -1));
 	}
 
 	public static String getEntityNameTransltated(String unlocalName) {
@@ -157,7 +157,7 @@ public final class Utils {
 	}
 
 	private static int getClampedKillCount(int amount) {
-		return MathHelper.clamp_int(amount, 0, TierHandler.getMaxKills(Configs.numtiers));
+		return MathHelper.clamp_int(amount, 0, TierHandler.getMaxKills((byte) (Configs.tiers.size() - 1)));
 	}
 
 	public static void writeEntityHeldItem(ItemStack shard, EntityLiving ent) {
@@ -228,7 +228,7 @@ public final class Utils {
 
 	public static void setShardBoundPlayer(ItemStack shard, EntityPlayer player) {
 		shard.stackTagCompound.setString("owner", player.getDisplayName());
-        shard.setItemDamage(MathHelper.clamp_int(getShardTier(shard), 0, Configs.numtiers));
+        shard.setItemDamage(MathHelper.clamp_int(getShardTier(shard), 0, Configs.tiers.size()));
 	}
 
 	public static String getShardBoundPlayer(ItemStack shard) {

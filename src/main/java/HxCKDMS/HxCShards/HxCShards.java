@@ -1,6 +1,7 @@
 package HxCKDMS.HxCShards;
 
 import HxCKDMS.HxCCore.HxCCore;
+import HxCKDMS.HxCCore.api.Configuration.Handlers.SpecialHandlers;
 import HxCKDMS.HxCCore.api.Configuration.HxCConfig;
 import HxCKDMS.HxCCore.api.Utils.LogHelper;
 import HxCKDMS.HxCShards.commands.CommandSoulShards;
@@ -45,12 +46,14 @@ public class HxCShards {
     public static HashMap<String, String> logDump = new HashMap<>();
 
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {}
+	public void preInit(FMLPreInitializationEvent event) {
+		SpecialHandlers.registerSpecialClass(Tier.class);
+	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		proxy.load();
-        config = new HxCConfig(Configs.class, "HxCSoulShards", HxCCore.HxCConfigDir, "cfg");
+        config = new HxCConfig(Configs.class, "HxCSoulShards", HxCCore.HxCConfigDir, "cfg", Reference.modID);
         config.initConfiguration();
 
         LogHelper.debug("Registering PlayerKill Event", Reference.modName);
@@ -75,7 +78,7 @@ public class HxCShards {
 	public void postInit(FMLPostInitializationEvent event) {
 		elist = new Entitylist();
 		elist.init();
-		entlist = new HxCConfig(Entitylist.class, "HxCSoulShards-EntityList", HxCCore.HxCConfigDir, "cfg");
+		entlist = new HxCConfig(Entitylist.class, "HxCSoulShards-EntityList", HxCCore.HxCConfigDir, "cfg", Reference.modID);
         entlist.initConfiguration();
 	}
 

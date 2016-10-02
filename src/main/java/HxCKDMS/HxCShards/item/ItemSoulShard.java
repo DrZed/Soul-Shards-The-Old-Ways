@@ -173,7 +173,7 @@ public class ItemSoulShard extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tabs, List list) {
-		for (byte i = 0; i <= Configs.numtiers; i++) {
+		for (byte i = 0; i < Configs.tiers.size(); i++) {
 			ItemStack stack = new ItemStack(item, 1);
 
 			Utils.setShardKillCount(stack, TierHandler.getMinKills(i));
@@ -209,13 +209,13 @@ public class ItemSoulShard extends Item {
 
     @Override
     public int getColorFromItemStack(ItemStack shard, int renderpass) {
-        if (Configs.newColors && Configs.numtiers > 10) {
-            float percentile = (float) shard.getItemDamage() / (float) Configs.numtiers;
+        if (Configs.newColors && Configs.tiers.size() > 10) {
+            float percentile = (float) shard.getItemDamage() / (float) Configs.tiers.size();
             if (percentile < 0.5f)
                 return new Color(1 - percentile, 0f, 1 - percentile).getRGB();
             else return new Color(percentile - 0.15f, 0f, 0f).getRGB();
         } else {
-            float percentile = (float) shard.getItemDamage() / (float) Configs.numtiers;
+            float percentile = (float) shard.getItemDamage() / (float) Configs.tiers.size();
 
             return new Color(Math.max(Math.min(percentile, 0.9f), 0.45f), 0f, Math.max(Math.min(percentile, 0.9f), 0.45f)).getRGB();
         }
