@@ -1,6 +1,5 @@
 package HxCKDMS.HxCShards.block;
 
-import HxCKDMS.HxCCore.api.Utils.LogHelper;
 import HxCKDMS.HxCShards.HxCShards;
 import HxCKDMS.HxCShards.tileentity.TileEntityCage;
 import HxCKDMS.HxCShards.utils.ModRegistry;
@@ -85,7 +84,6 @@ public class BlockCage extends BlockContainer {
 			TileEntity tile = world.getTileEntity(x, y, z);
 
 			if (tile == null) {
-				LogHelper.debug(Utils.localizeFormatted("chat.hxcshards.debug.tileerror", " " + x + " " + y + " " + " " + z), Reference.modName);
 				return;
 			}
 

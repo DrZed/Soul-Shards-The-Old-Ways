@@ -1,6 +1,5 @@
 package HxCKDMS.HxCShards.utils;
 
-import HxCKDMS.HxCCore.api.Utils.LogHelper;
 import HxCKDMS.HxCShards.HxCShards;
 import HxCKDMS.HxCShards.block.BlockCage;
 import HxCKDMS.HxCShards.block.BlockForge;
@@ -32,8 +31,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import static HxCKDMS.HxCShards.utils.Configs.tiers;
-
 public class ModRegistry {
 	// Tool material for the soul tools/sword
 	public static ToolMaterial SOULIUM = EnumHelper.addToolMaterial("SOULIUM", 3, 3122, 12.0F, 6F, 30);
@@ -61,7 +58,7 @@ public class ModRegistry {
 
 	public static void registerObjs() {
 		NetworkRegistry.INSTANCE.registerGuiHandler(HxCShards.modInstance, new GuiHandler());
-        LogHelper.debug("Registered " + tiers.size() + " shard tiers.", Reference.modName);
+
 		registerItems();
 		registerBlocks();
 		registerOreDictEntries();

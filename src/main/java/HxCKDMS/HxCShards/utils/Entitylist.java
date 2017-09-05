@@ -1,6 +1,6 @@
 package HxCKDMS.HxCShards.utils;
 
-import HxCKDMS.HxCCore.api.Configuration.Config;
+import hxckdms.hxcconfig.Config;
 
 import java.util.HashMap;
 import java.util.Iterator;

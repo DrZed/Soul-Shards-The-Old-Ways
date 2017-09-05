@@ -1,6 +1,5 @@
 package HxCKDMS.HxCShards.utils;
 
-import HxCKDMS.HxCCore.api.Utils.LogHelper;
 import net.minecraft.item.ItemStack;
 
 public final class TierHandler {
@@ -52,7 +51,6 @@ public final class TierHandler {
 			if (kills >= getMinKills(i) && kills <= getMaxKills(i))
                 return i;
 
-		LogHelper.debug(Utils.localizeFormatted("chat.hxcshards.debug.shardkillerror", "" + kills), Reference.modName);
 		return 0;
 	}
 }

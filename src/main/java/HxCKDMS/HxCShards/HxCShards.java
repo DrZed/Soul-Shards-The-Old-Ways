@@ -1,9 +1,5 @@
 package HxCKDMS.HxCShards;
 
-import HxCKDMS.HxCCore.HxCCore;
-import HxCKDMS.HxCCore.api.Configuration.Handlers.SpecialHandlers;
-import HxCKDMS.HxCCore.api.Configuration.HxCConfig;
-import HxCKDMS.HxCCore.api.Utils.LogHelper;
 import HxCKDMS.HxCShards.commands.CommandSoulShards;
 import HxCKDMS.HxCShards.events.AchievementEvents;
 import HxCKDMS.HxCShards.events.CreateShardEvent;
@@ -17,6 +13,9 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
+import hxckdms.hxcconfig.HxCConfig;
+import hxckdms.hxcconfig.handlers.SpecialHandlers;
+import hxckdms.hxccore.libraries.GlobalVariables;
 import net.minecraftforge.common.MinecraftForge;
 
 import java.util.HashMap;
@@ -47,28 +46,26 @@ public class HxCShards {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		SpecialHandlers.registerSpecialClass(Tier.class);
+		SpecialHandlers.registerSpecialClass(Configs.Tier.class);
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		proxy.load();
-        config = new HxCConfig(Configs.class, "HxCSoulShards", HxCCore.HxCConfigDir, "cfg", Reference.modID);
+        config = new HxCConfig(Configs.class, "HxCSoulShards", GlobalVariables.modConfigDir, "cfg", Reference.modID);
         config.initConfiguration();
+		(new Configs()).init();
+		config.initConfiguration();
 
-        LogHelper.debug("Registering PlayerKill Event", Reference.modName);
 		MinecraftForge.EVENT_BUS.register(new PlayerKillEntityEvent());
 
-		LogHelper.debug("Registering CreateShard Event", Reference.modName);
 		MinecraftForge.EVENT_BUS.register(new CreateShardEvent());
 		
 		MinecraftForge.EVENT_BUS.register(new AchievementEvents());
 		FMLCommonHandler.instance().bus().register(new AchievementEvents());
 
-        LogHelper.debug("Registering Objects", Reference.modName);
         ModRegistry.registerObjs();
 
-        LogHelper.debug("Registering EntityMapper", Reference.modName);
         EntityMapper.init();
 
 		FMLInterModComms.sendMessage("Waila", "register", Reference.wailaCallBack);
@@ -78,7 +75,7 @@ public class HxCShards {
 	public void postInit(FMLPostInitializationEvent event) {
 		elist = new Entitylist();
 		elist.init();
-		entlist = new HxCConfig(Entitylist.class, "HxCSoulShards-EntityList", HxCCore.HxCConfigDir, "cfg", Reference.modID);
+		entlist = new HxCConfig(Entitylist.class, "HxCSoulShards-EntityList", GlobalVariables.modConfigDir, "cfg", Reference.modID);
         entlist.initConfiguration();
 	}
 

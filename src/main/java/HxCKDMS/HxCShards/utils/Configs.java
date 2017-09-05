@@ -1,6 +1,6 @@
 package HxCKDMS.HxCShards.utils;
 
-import HxCKDMS.HxCCore.api.Configuration.Config;
+import hxckdms.hxcconfig.Config;
 
 import java.util.LinkedHashMap;
 
@@ -15,45 +15,39 @@ public class Configs {
 	public static byte maxspawns = 8, maxDelay = 120, delayMultiplier = 20,
             spawnrange = 4, enchantMaxLevel = 5;
 
-    public static float lightPercent = 0.25f, worldPercent = 0.75f, playerPercent = 0.5f, redstonePercent = 0.25f;
+    public static float lightPercent = 0.25f, worldPercent = 0.75f, playerPercent = 0.5f, redstonePercent = 0.75f;
 
 	public static LinkedHashMap<String, Tier> tiers = new LinkedHashMap<>();
 
-	static {
-        tiers.putIfAbsent("Tier0", newTier(0, (byte) 0, (byte) 120, true, true, true, false));
-		tiers.putIfAbsent("Tier1", newTier(64, (byte) 1, (byte) 120, true, true, true, false));
+	public void init() {
+		tiers.putIfAbsent("Tier0", new Tier(0, (byte) 0, (byte) 120, true, true, true, false));
+		tiers.putIfAbsent("Tier1", new Tier(64, (byte) 1, (byte) 120, true, true, true, false));
 		for (byte i = 2; i <= 5; i++) {
-			tiers.putIfAbsent("Tier" + i, newTier(tiers.get("Tier" + (i-1)).Kills * 2, ((float)i/(float)5)));
+			float percent = ((float) i / (float) 5);
+			tiers.putIfAbsent("Tier" + i, new Tier(tiers.get("Tier" + (i - 1)).Kills * 2, ((byte) (percent * maxspawns) >= 1 ? (byte) (percent * maxspawns) : 1), (byte) (Math.round(maxDelay * (1 - percent)) + 1),
+					percent < playerPercent, percent < lightPercent, percent < worldPercent, percent > redstonePercent));
 		}
-//        if (Configurations.DebugMode)
-//            tiers.forEach((tier, t) ->
-//                LogHelper.debug(tier + " Registered with \n Kills : " + t.Kills + "  \n Delay : " + t.Delay + " \n Checks Light : " +
-//                        t.LightCheck + " \n Checks World : " + t.WorldCheck + " \n Redstone Check : " + t.Redstone +
-//                        " \n Player Check : " + t.PlayerCheck + " \n Spawns : " + t.Spawns, Reference.modName)
-//            );
+
 	}
 
-	public static Tier newTier(int KillsRequired, byte Spawns, byte Delay, boolean light, boolean player, boolean world, boolean redstone) {
-		Tier t = new Tier();
-        t.Delay = Delay;
-		t.Kills = KillsRequired > 8 ? KillsRequired : 0;
-		t.LightCheck = light;
-		t.WorldCheck = world;
-		t.Spawns = Spawns;
-		t.PlayerCheck = player;
-		t.Redstone = redstone;
-		return t;
-	}
+	public class Tier {
+		public int Kills;
+		public byte Spawns;
+		public byte Delay;
+		public boolean PlayerCheck;
+		public boolean LightCheck;
+		public boolean WorldCheck;
+		public boolean Redstone;
 
-	public static Tier newTier(int KillsRequired, float percent) {
-		Tier t = new Tier();
-		t.Delay = (byte)(Math.round(maxDelay * (1-percent)) + 1);
-		t.Kills = KillsRequired;
-		t.LightCheck = percent < lightPercent;
-		t.WorldCheck = percent < worldPercent;
-		t.Spawns = ((byte)(percent * maxspawns) >= 1 ? (byte)(percent * maxspawns) : 1);
-		t.PlayerCheck = percent < playerPercent;
-		t.Redstone = percent > redstonePercent;
-        return t;
+		public Tier() {}
+		public Tier(int killCount, byte spawnCount, byte delayAmount, boolean checkPlayer, boolean checkLight, boolean checkWorld, boolean checkRedstone) {
+			Kills = killCount;
+			Spawns = spawnCount;
+			Delay = delayAmount;
+			PlayerCheck = checkPlayer;
+			LightCheck = checkLight;
+			WorldCheck = checkWorld;
+			Redstone = checkRedstone;
+		}
 	}
 }

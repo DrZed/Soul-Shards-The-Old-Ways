@@ -1,7 +1,5 @@
 package HxCKDMS.HxCShards.tileentity;
 
-import HxCKDMS.HxCCore.api.Utils.AABBUtils;
-import HxCKDMS.HxCCore.api.Utils.LogHelper;
 import HxCKDMS.HxCShards.utils.*;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.*;
@@ -98,8 +96,6 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 
 		if (shard != null && counter >= delay) {
-			LogHelper.debug(Utils.localizeFormatted("chat.hxcshards.debug.successspawn", "" + entName), Reference.modName);
-
 			EntityLiving[] toSpawn = new EntityLiving[TierHandler.getNumSpawns(tier)];
 
 			ItemStack heldItem = Utils.getEntityHeldItem(shard);

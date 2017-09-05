@@ -1,6 +1,5 @@
 package HxCKDMS.HxCShards.utils;
 
-import HxCKDMS.HxCCore.api.Utils.LogHelper;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
@@ -23,12 +22,10 @@ public final class EntityMapper {
 	public static void init() {
 		for (Map.Entry<Class, String> entry : ((HashMap<Class, String>) EntityList.classToStringMapping).entrySet()) {
 			if (entityList.contains(entry.getValue())) {
-				LogHelper.debug(Utils.localizeFormatted("chat.sstow.util.entitymapskip1", "" + entry.getValue()), Reference.modName);
 				continue;
 			}
 
 			if (IBossDisplayData.class.isAssignableFrom(entry.getKey()) && !Configs.BossMobShards) {
-                LogHelper.debug(Utils.localizeFormatted("chat.sstow.util.entitymapskip2", "" + entry.getValue()), Reference.modName);
 				continue;
 			}
 
@@ -39,7 +36,6 @@ public final class EntityMapper {
 
 		entityList.add("Wither Skeleton");
 
-		LogHelper.debug(Utils.localizeFormatted("chat.sstow.util.entitymapdone", "" + entityList.size()), Reference.modName);
 	}
 
 	public static boolean isEntityValid(String entName) {
