@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 import java.awt.*;
 import java.util.List;
 
-public class ItemSoulShard extends Item {
+public class  ItemSoulShard extends Item {
     public ItemSoulShard() {
 		this.setCreativeTab(ModRegistry.CREATIVE_TAB);
 		this.setMaxStackSize(64);

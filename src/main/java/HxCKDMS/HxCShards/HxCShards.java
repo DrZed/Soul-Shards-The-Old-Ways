@@ -54,7 +54,7 @@ public class HxCShards {
 		proxy.load();
         config = new HxCConfig(Configs.class, "HxCSoulShards", GlobalVariables.modConfigDir, "cfg", Reference.modID);
         config.initConfiguration();
-		(new Configs()).init();
+		Configs.init();
 		config.initConfiguration();
 
 		MinecraftForge.EVENT_BUS.register(new PlayerKillEntityEvent());

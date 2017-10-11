@@ -22,7 +22,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
     public ItemStack shard;
 	public int counter;
     public int disableTimer;
-    public int delay = 1;
+    public int delay = 10000;
 	private int updateCounter;
 	private byte tier;
 	private static final int slot = 0;
@@ -96,6 +96,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 
 		if (shard != null && counter >= delay) {
+			System.out.println(counter + " / " + delay);
 			EntityLiving[] toSpawn = new EntityLiving[TierHandler.getNumSpawns(tier)];
 
 			ItemStack heldItem = Utils.getEntityHeldItem(shard);

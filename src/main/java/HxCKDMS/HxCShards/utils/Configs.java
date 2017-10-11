@@ -19,7 +19,7 @@ public class Configs {
 
 	public static LinkedHashMap<String, Tier> tiers = new LinkedHashMap<>();
 
-	public void init() {
+	public static void init() {
 		tiers.putIfAbsent("Tier0", new Tier(0, (byte) 0, (byte) 120, true, true, true, false));
 		tiers.putIfAbsent("Tier1", new Tier(64, (byte) 1, (byte) 120, true, true, true, false));
 		for (byte i = 2; i <= 5; i++) {
@@ -30,7 +30,7 @@ public class Configs {
 
 	}
 
-	public class Tier {
+	public static class Tier {
 		public int Kills;
 		public byte Spawns;
 		public byte Delay;
