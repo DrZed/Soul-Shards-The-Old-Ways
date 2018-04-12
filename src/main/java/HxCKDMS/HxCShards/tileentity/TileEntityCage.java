@@ -20,18 +20,19 @@ import java.util.List;
 public class TileEntityCage extends TileEntity implements ISidedInventory {
 
     public ItemStack shard;
-	public int counter;
-    public int disableTimer;
-    public int delay = 10000;
+    public int disableTimer = 0;
+
+	private int counter;
+    private int delay = 10000;
 	private int updateCounter;
 	private byte tier;
 	private static final int slot = 0;
 
+	private boolean redstoneActive;
+	private boolean active;
+
 	private String entName = "";
 	private String owner = "";
-	private boolean redstoneActive;
-	public boolean active;
-
 	private String cageName;
 
 	public TileEntityCage() {
@@ -146,7 +147,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 		if ((ent instanceof EntitySkeleton)) {
 			EntitySkeleton skele = (EntitySkeleton) ent;
-			return (skele.getSkeletonType() == 1) && (dimension == -1) || dimension == 0;
+			return (skele.getSkeletonType() == 1) && dimension == -1;
 		}
 
 		if (((ent instanceof EntityBlaze))
@@ -161,10 +162,9 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 	private boolean canSpawnInLight(EntityLiving ent) {
 		int light = worldObj.getBlockLightValue(xCoord, yCoord, zCoord);
-		if (((ent instanceof EntityMob)) || ((ent instanceof IMob))) {
-			return light <= 8;
-		}
-		return !(((ent instanceof EntityAnimal)) || ((ent instanceof IAnimals))) || light > 8;
+		if (((ent instanceof EntityMob)) || ((ent instanceof IMob)))
+			return light <= 7;
+		return !(((ent instanceof EntityAnimal)) || ((ent instanceof IAnimals))) || light >= 8;
 	}
 
 	private boolean canSpawnAtCoords(EntityLiving ent) {

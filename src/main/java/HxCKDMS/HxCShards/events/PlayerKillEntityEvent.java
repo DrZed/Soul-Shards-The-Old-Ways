@@ -3,7 +3,6 @@ package HxCKDMS.HxCShards.events;
 import HxCKDMS.HxCShards.HxCShards;
 import HxCKDMS.HxCShards.utils.*;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import hxckdms.hxccore.configs.Configuration;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
@@ -64,8 +63,14 @@ public class PlayerKillEntityEvent {
                 soulStealer *= Configs.enchantBonus;
 
                 Utils.increaseShardKillCount(shard, (byte) (1 + soulStealer));
+                if (player.getHeldItem().getItem() == ModRegistry.ItemSwordSoul2)
+                    Utils.increaseShardKillCount(shard, (byte) (2));
+                else if (player.getHeldItem().getItem() == ModRegistry.ItemSwordSoul2)
+                    Utils.increaseShardKillCount(shard, (byte) (5));
                 Utils.checkForAchievements(player, shard);
             }
         }
+        if (event.source.getEntity() instanceof EntityPlayer && ((EntityPlayer) event.source.getEntity()).getHeldItem().getItem() == ModRegistry.ItemSwordSoul3)
+            ((EntityPlayer) event.source.getEntity()).getHeldItem();
     }
 }

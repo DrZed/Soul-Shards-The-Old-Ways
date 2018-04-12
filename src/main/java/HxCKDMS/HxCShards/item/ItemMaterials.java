@@ -15,12 +15,12 @@ import java.util.List;
 
 public class ItemMaterials extends Item {
 
-    private static String[] names = { 
-    
-    	"nugget.iron",			// 0
-    	"nugget.soulium", 		// 1
-    	"ingot.soulium", 		// 2
-    	"dust.vile" 			// 3
+    private static String[] names = {
+    	"nugget.soulium", 		    // 0
+    	"ingot.soulium", 		    // 1
+    	"dust.vile", 			    // 2
+        "ingot.improved_soulium",    // 3
+        "ingot.draconic_soulium",   // 4
     	
     };
     

@@ -44,9 +44,10 @@ public class SFRecipeHandler {
     }
 
 	public ItemStack getSmeltingResult(ItemStack itemstack) {
+	    ItemStack stack = null;
         if (itemstack != null && recipes.containsKey(itemstack.getItem()))
-            return recipes.get(itemstack.getItem()).getOutput(itemstack);
-		return null;
+            stack = recipes.get(itemstack.getItem()).getOutput(itemstack);
+        return stack;
 	}
 
 	public int getSmeltingTime(ItemStack itemstack) {

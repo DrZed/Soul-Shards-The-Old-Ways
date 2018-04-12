@@ -12,6 +12,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.IIcon;
 
 public class ItemSwordSoul extends ItemSword {
+	@SideOnly(Side.CLIENT)
+	private IIcon itemIcon2;
+	@SideOnly(Side.CLIENT)
+	private IIcon itemIcon3;
+
 	public ItemSwordSoul(ToolMaterial Material) {
 		super(Material);
 		this.setCreativeTab(ModRegistry.CREATIVE_TAB);
@@ -19,6 +24,12 @@ public class ItemSwordSoul extends ItemSword {
 	}
 
 	public String getUnlocalizedName(ItemStack stack) {
+		if (stack.getItem() == ModRegistry.ItemSwordSoul)
+			return Reference.modName + ".soultool.sword";
+		if (stack.getItem() == ModRegistry.ItemSwordSoul2)
+			return Reference.modName + ".soultool2.sword";
+		if (stack.getItem() == ModRegistry.ItemSwordSoul3)
+			return Reference.modName + ".soultool3.sword";
 		return Reference.modName + ".soultool.sword";
 	}
 
@@ -26,10 +37,18 @@ public class ItemSwordSoul extends ItemSword {
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
 		itemIcon = iconRegister.registerIcon(Reference.modID + ":swordSoul" + (Configs.useSSTOWTextures ? "_old" : ""));
+		itemIcon2 = iconRegister.registerIcon(Reference.modID + ":swordImprovedSoul");
+		itemIcon3 = iconRegister.registerIcon(Reference.modID + ":swordDraconicSoul");
 	}
 
     @Override
     public IIcon getIconIndex(ItemStack stack) {
+		if (stack.getItem() == ModRegistry.ItemSwordSoul)
+			return itemIcon;
+		if (stack.getItem() == ModRegistry.ItemSwordSoul2)
+			return itemIcon2;
+		if (stack.getItem() == ModRegistry.ItemSwordSoul3)
+			return itemIcon3;
         return itemIcon;
     }
 

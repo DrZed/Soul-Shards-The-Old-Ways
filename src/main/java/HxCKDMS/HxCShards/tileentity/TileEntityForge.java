@@ -2,6 +2,7 @@ package HxCKDMS.HxCShards.tileentity;
 
 import HxCKDMS.HxCShards.utils.ModRegistry;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -133,11 +134,11 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
     private boolean cookItem() {
         if (getStackInSlot(2) != null && ModRegistry.sFHandler.getSmeltingResult(getStackInSlot(0)).getItem() == getStackInSlot(2).getItem()) {
             ItemStack out = ModRegistry.sFHandler.getSmeltingResult(getStackInSlot(0));
-            if (out.stackSize + out.stackSize > 64)
+            if (out == null) return false;
+			if (1 + getStackInSlot(2).stackSize > getStackInSlot(2).getMaxStackSize())
                 return false;
-            out.stackSize += out.stackSize;
-            setInventorySlotContents(2, out);
-        } else {
+			getStackInSlot(2).stackSize += 1;
+        } else if (getStackInSlot(2) == null) {
             setInventorySlotContents(2, ModRegistry.sFHandler.getSmeltingResult(getStackInSlot(0)));
         }
         decrStackSize(0, 1);
@@ -163,6 +164,13 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
             itemCookTime = 0;
         } else if (itemCookTime > 0) {
             progress++;
+            if (worldObj.getBlock(xCoord, yCoord - 1, zCoord) == Blocks.fire) {
+            	progress++;
+			} else if (worldObj.getBlock(xCoord, yCoord - 1, zCoord) == Blocks.lava) {
+				progress += 3;
+			} else if (worldObj.getBlock(xCoord, yCoord - 1, zCoord) == Blocks.command_block) {
+				progress += 199;
+			}
         } else {
             itemCookTime = ModRegistry.sFHandler.getSmeltingTime(getStackInSlot(0));
             progress = 0;

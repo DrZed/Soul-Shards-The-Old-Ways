@@ -5,16 +5,25 @@ HxCShards.shard.name=Soul Shard
 item.guide.book.missing.name=Torn Page
 
 # Materials
-item.HxCShards.material.nugget.iron.name=Iron Nugget
 item.HxCShards.material.nugget.soulium.name=Soulium Nugget
 item.HxCShards.material.ingot.soulium.name=Soulium Ingot
 item.HxCShards.material.dust.vile.name=Vile Dust
+item.HxCShards.material.ingot.improved_soulium.name=Improved Soulium Ingot
+item.HxCShards.material.ingot.draconic_soulium.name=Doom Ingot
 
 # Tools
 HxCShards.soultool.sword.name=Soul Blade
 HxCShards.soultool.pickaxe.name=Soul Pickaxe
 HxCShards.soultool.axe.name=Soul Axe
 HxCShards.soultool.spade.name=Soul Spade
+HxCShards.soultool2.sword.name=Improved Soul Blade
+HxCShards.soultool2.pickaxe.name=Improved Soul Pickaxe
+HxCShards.soultool2.axe.name=Improved Soul Axe
+HxCShards.soultool2.spade.name=Improved Soul Spade
+HxCShards.soultool3.sword.name=Doom Blade
+HxCShards.soultool3.pickaxe.name=Doom Pickaxe
+HxCShards.soultool3.axe.name=Doom Axe
+HxCShards.soultool3.spade.name=Doom Spade
 
 # Blocks
 HxCShards.soul_forge.name=Soul Forge

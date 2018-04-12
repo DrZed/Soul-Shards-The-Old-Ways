@@ -9,8 +9,13 @@ import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.util.IIcon;
 
 public class ItemAxeSoul extends ItemAxe {
+	@SideOnly(Side.CLIENT)
+	private IIcon itemIcon2;
+	@SideOnly(Side.CLIENT)
+	private IIcon itemIcon3;
 
 	public ItemAxeSoul(ToolMaterial Material) {
 		super(Material);
@@ -19,6 +24,12 @@ public class ItemAxeSoul extends ItemAxe {
 	}
 
 	public String getUnlocalizedName(ItemStack stack) {
+		if (stack.getItem() == ModRegistry.ItemAxeSoul)
+			return Reference.modName + ".soultool.axe";
+		if (stack.getItem() == ModRegistry.ItemAxeSoul2)
+			return Reference.modName + ".soultool2.axe";
+		if (stack.getItem() == ModRegistry.ItemAxeSoul3)
+			return Reference.modName + ".soultool3.axe";
 		return Reference.modName + ".soultool.axe";
 	}
 
@@ -26,5 +37,23 @@ public class ItemAxeSoul extends ItemAxe {
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
 		itemIcon = iconRegister.registerIcon(Reference.modID + ":axeSoul" + (Configs.useSSTOWTextures ? "_old" : ""));
+		itemIcon2 = iconRegister.registerIcon(Reference.modID + ":axeImprovedSoul");
+		itemIcon3 = iconRegister.registerIcon(Reference.modID + ":axeDraconicSoul");
+	}
+
+	@Override
+	public IIcon getIconIndex(ItemStack stack) {
+		if (stack.getItem() == ModRegistry.ItemAxeSoul)
+			return itemIcon;
+		if (stack.getItem() == ModRegistry.ItemAxeSoul2)
+			return itemIcon2;
+		if (stack.getItem() == ModRegistry.ItemAxeSoul3)
+			return itemIcon3;
+		return itemIcon;
+	}
+
+	@Override
+	public IIcon getIcon(ItemStack stack, int pass) {
+		return getIconIndex(stack);
 	}
 }
