@@ -8,10 +8,12 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.world.World;
 
 import java.util.List;
 
@@ -111,6 +113,12 @@ public class CommandSoulShards extends CommandBase {
                 case "logdumpclient":
                     HxCShards.logDump.values().forEach(b -> sender.addChatMessage(new ChatComponentText(b)));
                     break;
+                case "spawnaltar":
+                    if (params.length == 4)
+                        spawnAltar(sender.getEntityWorld(), Integer.parseInt(params[1]), Integer.parseInt(params[2]), Integer.parseInt(params[3]));
+                    else
+                        spawnAltar(sender.getEntityWorld(), sender.getPlayerCoordinates().posX, sender.getPlayerCoordinates().posY - 1, sender.getPlayerCoordinates().posZ);
+                    break;
                 default:
                     sender.addChatMessage(new ChatComponentText(Utils.localize("chat.hxcshards.command.killall")));
                     sender.addChatMessage(new ChatComponentText(Utils.localize("chat.hxcshards.command.settier")));
@@ -122,4 +130,63 @@ public class CommandSoulShards extends CommandBase {
             }
 		}
 	}
+
+    private void spawnAltar(World world, int x, int y, int z) {
+        world.setBlock(x + 1, y, z, Blocks.diamond_block);
+        world.setBlock(x - 1, y, z, Blocks.diamond_block);
+        world.setBlock(x, y, z + 1, Blocks.diamond_block);
+        world.setBlock(x, y, z - 1, Blocks.diamond_block);
+        world.setBlock(x + 1, y, z + 1, Blocks.quartz_block);
+        world.setBlock(x - 1, y, z - 1, Blocks.quartz_block);
+        world.setBlock(x - 1, y, z + 1, Blocks.quartz_block);
+        world.setBlock(x + 1, y, z - 1, Blocks.quartz_block);
+        world.setBlock(x + 2, y, z + 2, Blocks.obsidian);
+        world.setBlock(x + 2, y, z + 1, Blocks.obsidian);
+        world.setBlock(x + 1, y, z + 2, Blocks.obsidian);
+        world.setBlock(x - 2, y, z + 2, Blocks.obsidian);
+        world.setBlock(x - 2, y, z + 1, Blocks.obsidian);
+        world.setBlock(x - 1, y, z + 2, Blocks.obsidian);
+        world.setBlock(x + 2, y, z - 2, Blocks.obsidian);
+        world.setBlock(x + 2, y, z - 1, Blocks.obsidian);
+        world.setBlock(x + 1, y, z - 2, Blocks.obsidian);
+        world.setBlock(x - 2, y, z - 2, Blocks.obsidian);
+        world.setBlock(x - 2, y, z - 1, Blocks.obsidian);
+        world.setBlock(x - 1, y, z - 2, Blocks.obsidian);
+        world.setBlock(x + 2, y, z, Blocks.netherrack);
+        world.setBlock(x - 2, y, z, Blocks.netherrack);
+        world.setBlock(x, y, z + 2, Blocks.netherrack);
+        world.setBlock(x, y, z - 2, Blocks.netherrack);
+        world.setBlock(x + 2, y + 1, z, Blocks.fire);
+        world.setBlock(x - 2, y + 1, z, Blocks.fire);
+        world.setBlock(x, y + 1, z + 2, Blocks.fire);
+        world.setBlock(x, y + 1, z - 2, Blocks.fire);
+        world.setBlock(x + 3, y, z + 3, Blocks.end_stone);
+        world.setBlock(x + 3, y, z + 2, Blocks.end_stone);
+        world.setBlock(x + 2, y, z + 3, Blocks.end_stone);
+        world.setBlock(x - 3, y, z + 3, Blocks.end_stone);
+        world.setBlock(x - 3, y, z + 2, Blocks.end_stone);
+        world.setBlock(x - 2, y, z + 3, Blocks.end_stone);
+        world.setBlock(x + 3, y, z - 3, Blocks.end_stone);
+        world.setBlock(x + 3, y, z - 2, Blocks.end_stone);
+        world.setBlock(x + 2, y, z - 3, Blocks.end_stone);
+        world.setBlock(x - 3, y, z - 3, Blocks.end_stone);
+        world.setBlock(x - 3, y, z - 2, Blocks.end_stone);
+        world.setBlock(x - 2, y, z - 3, Blocks.end_stone);
+        world.setBlock(x + 3, y + 1, z + 3, Blocks.end_stone);
+        world.setBlock(x - 3, y + 1, z - 3, Blocks.end_stone);
+        world.setBlock(x - 3, y + 1, z + 3, Blocks.end_stone);
+        world.setBlock(x + 3, y + 1, z - 3, Blocks.end_stone);
+        world.setBlock(x + 3, y + 2, z + 3, Blocks.end_stone);
+        world.setBlock(x - 3, y + 2, z - 3, Blocks.end_stone);
+        world.setBlock(x - 3, y + 2, z + 3, Blocks.end_stone);
+        world.setBlock(x + 3, y + 2, z - 3, Blocks.end_stone);
+        world.setBlock(x + 3, y + 3, z + 3, Blocks.end_stone);
+        world.setBlock(x - 3, y + 3, z - 3, Blocks.end_stone);
+        world.setBlock(x - 3, y + 3, z + 3, Blocks.end_stone);
+        world.setBlock(x + 3, y + 3, z - 3, Blocks.end_stone);
+        world.setBlock(x + 3, y + 4, z + 3, Blocks.glowstone);
+        world.setBlock(x - 3, y + 4, z - 3, Blocks.glowstone);
+        world.setBlock(x - 3, y + 4, z + 3, Blocks.glowstone);
+        world.setBlock(x + 3, y + 4, z - 3, Blocks.glowstone);
+    }
 }

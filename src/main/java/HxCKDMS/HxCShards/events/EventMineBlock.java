@@ -23,7 +23,6 @@ import java.util.List;
 public class EventMineBlock {
     @SubscribeEvent
     public void mineBlock(BlockEvent.BreakEvent event) {
-        System.out.println(event.block.getUnlocalizedName());
         if (event.getPlayer().getHeldItem() != null && event.getPlayer().getHeldItem().getItem() == ModRegistry.ItemPickaxeSoul3 && event.getPlayer().isSneaking()) {
             long starttime = System.nanoTime();
             for (int x = event.x - 10; x <= event.x + 10; x++) {

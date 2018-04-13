@@ -51,7 +51,6 @@ public class HxCShards {
 	public void init(FMLInitializationEvent event) {
 		proxy.load();
         config = new HxCConfig(Configs.class, "HxCSoulShards", GlobalVariables.modConfigDir, "cfg", Reference.modID);
-        config.initConfiguration();
 		Configs.init();
 		config.initConfiguration();
 
