@@ -178,7 +178,11 @@ public class TileEntityForge extends TileEntity implements ISidedInventory {
 	}
 
 	public static boolean isItemFuel(ItemStack itemstack) {
-        return itemstack != null && ModRegistry.sFHandler.getFuelList().containsKey(itemstack);
+		for (ItemStack fuel : ModRegistry.sFHandler.getFuelList().keySet()) {
+			if (fuel.getItem() == itemstack.getItem() && fuel.getItemDamage() == itemstack.getItemDamage())
+				return true;
+		}
+		return false;
     }
 
 	@Override

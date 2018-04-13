@@ -60,11 +60,11 @@ public class EventMineBlock {
                     event.getPlayer().getHeldItem().damageItem(1, event.getPlayer());
                 }
             }
-            drops.forEach((drop, amount) -> {
-                for (int i = 0; i < amount; i++) {
+            for (ItemStack drop : drops.keySet()) {
+                for (int i = 0; i < drops.get(drop); i++) {
                     event.world.spawnEntityInWorld(new EntityItem(event.world, event.getPlayer().posX, event.getPlayer().posY + 1, event.getPlayer().posZ, drop));
                 }
-            });
+            }
             Logger.info(("Collected wood in : " + (System.nanoTime() - starttime)/1000000f + " milliseconds."), Reference.modName);
         }
     }

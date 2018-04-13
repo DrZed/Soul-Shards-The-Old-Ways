@@ -17,7 +17,11 @@ import java.util.List;
 public class EventCreateDSoulium {
     @SubscribeEvent
     public void itemDropInWorld(ItemTossEvent event) {
-        if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemMaterials && (event.entityItem.getEntityItem().getItemDamage() == 3 || event.entityItem.getEntityItem().getItemDamage() == 4)) {
+        if ((event.entityItem.getEntityItem().getItem() == ModRegistry.ItemMaterials && event.entityItem.getEntityItem().getItemDamage() == 3) ||
+                event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSwordSoul2 ||
+                event.entityItem.getEntityItem().getItem() == ModRegistry.ItemPickaxeSoul2 ||
+                event.entityItem.getEntityItem().getItem() == ModRegistry.ItemAxeSoul2 ||
+                event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSpadeSoul2) {
             int x = (int) Math.round(event.entityItem.posX);
             int y = (int) Math.round(event.entityItem.posY - 2);
             int z = (int) Math.round(event.entityItem.posZ);
@@ -54,7 +58,7 @@ public class EventCreateDSoulium {
                     }
                 }
             }
-            if (hasBars[0] && event.entityItem.getEntityItem().getItemDamage() == 4) {
+            if (hasBars[0]) {
                 for (int i = y - 5; i <= y; i++) {
                     for (int j = x - 1; j <= x + 1; j++) {
                         for (int k = z - 1; k <= z + 1; k++) {
@@ -62,13 +66,13 @@ public class EventCreateDSoulium {
                                 event.entityItem.setDead();
                                 items[0].setDead();
                                 clearStructure(world, j, i, k);
-                                if (items[0].getEntityItem().getItem() == ModRegistry.ItemSwordSoul2) {
+                                if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSwordSoul2) {
                                     world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemSwordSoul3)));
-                                } else if (items[0].getEntityItem().getItem() == ModRegistry.ItemAxeSoul2) {
+                                } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemAxeSoul2) {
                                     world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemAxeSoul3)));
-                                } else if (items[0].getEntityItem().getItem() == ModRegistry.ItemPickaxeSoul2) {
+                                } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemPickaxeSoul2) {
                                     world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemPickaxeSoul3)));
-                                } else if (items[0].getEntityItem().getItem() == ModRegistry.ItemSpadeSoul2) {
+                                } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSpadeSoul2) {
                                     world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemSpadeSoul3)));
                                 }
                             }
