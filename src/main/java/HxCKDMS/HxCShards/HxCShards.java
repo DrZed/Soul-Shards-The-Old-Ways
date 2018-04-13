@@ -1,10 +1,7 @@
 package HxCKDMS.HxCShards;
 
 import HxCKDMS.HxCShards.commands.CommandSoulShards;
-import HxCKDMS.HxCShards.events.AchievementEvents;
-import HxCKDMS.HxCShards.events.CreateShardEvent;
-import HxCKDMS.HxCShards.events.EventCreateDSoulium;
-import HxCKDMS.HxCShards.events.PlayerKillEntityEvent;
+import HxCKDMS.HxCShards.events.*;
 import HxCKDMS.HxCShards.proxies.IProxy;
 import HxCKDMS.HxCShards.tileentity.TileEntityCage;
 import HxCKDMS.HxCShards.utils.*;
@@ -59,6 +56,8 @@ public class HxCShards {
 		config.initConfiguration();
 
 		MinecraftForge.EVENT_BUS.register(new EventCreateDSoulium());
+
+		MinecraftForge.EVENT_BUS.register(new EventMineBlock());
 
 		MinecraftForge.EVENT_BUS.register(new PlayerKillEntityEvent());
 

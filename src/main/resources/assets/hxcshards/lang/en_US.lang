@@ -35,6 +35,10 @@ tile.HxCShards.block.material.soulium.name=Block of Soulium
 # Enchantment
 enchantment.soul_stealer=Soul Stealer
 
+# Damagetype
+death.attack.doomblade=%1$s was doomed to be annihilated.
+death.attack.doomblade_aoe=%1$s was doomed to be annihilated.
+
 # Achievements
 achievement.createShard=Create a Soul Shard
 achievement.createShard.desc=Created your first Soul Shard

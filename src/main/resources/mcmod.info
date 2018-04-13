@@ -1,3 +1,4 @@
+[
 {
     "modid": "HxCShards",
     "name": "HxCShards",
@@ -13,6 +14,7 @@
     "logoFile": "/logo.png",
     "screenshots": [],
     "dependencies": [
-        "MinecraftForge"
+        "mod_MinecraftForge"
     ]
 }
+]

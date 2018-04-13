@@ -97,7 +97,6 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 
 
 		if (shard != null && counter >= delay) {
-			System.out.println(counter + " / " + delay);
 			EntityLiving[] toSpawn = new EntityLiving[TierHandler.getNumSpawns(tier)];
 
 			ItemStack heldItem = Utils.getEntityHeldItem(shard);

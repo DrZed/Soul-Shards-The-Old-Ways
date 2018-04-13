@@ -17,7 +17,7 @@ import java.util.List;
 public class EventCreateDSoulium {
     @SubscribeEvent
     public void itemDropInWorld(ItemTossEvent event) {
-        if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemMaterials && event.entityItem.getEntityItem().getItemDamage() == 3) {
+        if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemMaterials && (event.entityItem.getEntityItem().getItemDamage() == 3 || event.entityItem.getEntityItem().getItemDamage() == 4)) {
             int x = (int) Math.round(event.entityItem.posX);
             int y = (int) Math.round(event.entityItem.posY - 2);
             int z = (int) Math.round(event.entityItem.posZ);
@@ -30,7 +30,7 @@ public class EventCreateDSoulium {
             final boolean[] hasBars = {false};
             final EntityItem[] items = {null};
             l.forEach(i -> {
-                if (i.getEntityItem().getItem() == Items.nether_star && i.getEntityItem().stackSize >= a * 4) {
+                if (i.getEntityItem().getItem() == Items.nether_star && i.getEntityItem().stackSize >= a * (world.difficultySetting.getDifficultyId() * 4)) {
                     hasStars[0] = true;
                     items[0] = i;
                 }
@@ -40,7 +40,7 @@ public class EventCreateDSoulium {
                 }
             });
 
-            if (hasStars[0]) {
+            if (hasStars[0] && event.entityItem.getEntityItem().getItemDamage() == 3) {
                 for (int i = y - 5; i <= y; i++) {
                     for (int j = x - 1; j <= x + 1; j++) {
                         for (int k = z - 1; k <= z + 1; k++) {
@@ -54,7 +54,7 @@ public class EventCreateDSoulium {
                     }
                 }
             }
-            if (hasBars[0]) {
+            if (hasBars[0] && event.entityItem.getEntityItem().getItemDamage() == 4) {
                 for (int i = y - 5; i <= y; i++) {
                     for (int j = x - 1; j <= x + 1; j++) {
                         for (int k = z - 1; k <= z + 1; k++) {

@@ -35,7 +35,7 @@ public class ModRegistry {
 	// Tool material for the soul tools/sword
 	private static ToolMaterial SOULIUM = EnumHelper.addToolMaterial("SOULIUM", 3, 3122, 12.0F, 8F, 30);
 	private static ToolMaterial IMPROVED_SOULIUM = EnumHelper.addToolMaterial("IMPROVED_SOULIUM", 6, 8128, 19.0F, 13F, 42);
-	private static ToolMaterial DRACONIC_SOULIUM = EnumHelper.addToolMaterial("DRACONIC_SOULIUM", 15, 812800, 30.0F, 20F, 60);
+	private static ToolMaterial DRACONIC_SOULIUM = EnumHelper.addToolMaterial("DRACONIC_SOULIUM", 15, 812800, 80.0F, 20F, 60);
 
 	// Setting up the enchantment details from the config
 	public static Enchantment SOUL_STEALER = new EnchantmentSoulStealer(Configs.enchantID, Configs.enchantWeight);
@@ -145,9 +145,8 @@ public class ModRegistry {
 
 
     private static void registerSoulForgeRecipes() {
-        sFHandler.addFuel(new ItemStack(ItemMaterials, 1, 3), 900);
-        sFHandler.addFuel(new ItemStack(Items.coal, 1, 1), 250);
-        sFHandler.addFuel(new ItemStack(Items.coal, 1, 0), 250);
+        sFHandler.addFuel(new ItemStack(ItemMaterials, 1, 3), 1000);
+        sFHandler.addFuel(new ItemStack(Items.blaze_powder, 1, 0), 50);
         sFHandler.addRecipe(new ItemStack(ItemSoulShard, 1), new ItemStack(Items.diamond), 24000);
         sFHandler.addRecipe(new ItemStack(ItemMaterials, 1, 2), new ItemStack(Items.gold_ingot), 1800);
         sFHandler.addRecipe(new ItemStack(ItemMaterials, 2, 3), new ItemStack(Blocks.soul_sand), 500);
