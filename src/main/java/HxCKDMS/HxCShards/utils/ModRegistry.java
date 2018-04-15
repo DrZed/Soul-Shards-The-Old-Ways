@@ -33,9 +33,9 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class ModRegistry {
 	// Tool material for the soul tools/sword
-	private static ToolMaterial SOULIUM = EnumHelper.addToolMaterial("SOULIUM", 3, 3122, 12.0F, 8F, 30);
-	private static ToolMaterial IMPROVED_SOULIUM = EnumHelper.addToolMaterial("IMPROVED_SOULIUM", 6, 8128, 19.0F, 13F, 42);
-	private static ToolMaterial DRACONIC_SOULIUM = EnumHelper.addToolMaterial("DRACONIC_SOULIUM", 15, 812800, 80.0F, 20F, 60);
+	private static ToolMaterial SOULIUM = EnumHelper.addToolMaterial("SOULIUM", Configs.souliumMaterialHarvestLevel, Configs.souliumMaterialDurability, Configs.souliumMaterialMiningSpeed, Configs.souliumMaterialDamage, Configs.souliumMaterialEnchantability);
+	private static ToolMaterial IMPROVED_SOULIUM = EnumHelper.addToolMaterial("IMPROVED_SOULIUM", Configs.souliumMaterialHarvestLevel * 2, Math.round(Configs.souliumMaterialDurability * 2.5f), Configs.souliumMaterialMiningSpeed * 1.5f, Configs.souliumMaterialDamage * 1.3f, Math.round( Configs.souliumMaterialEnchantability * 1.5f));
+	private static ToolMaterial DRACONIC_SOULIUM = EnumHelper.addToolMaterial("DRACONIC_SOULIUM", Configs.souliumMaterialHarvestLevel * 5, Configs.souliumMaterialDurability * 15, Configs.souliumMaterialMiningSpeed * 8f, Configs.souliumMaterialDamage * 2.25f, Configs.souliumMaterialEnchantability * 2);
 
 	// Setting up the enchantment details from the config
 	public static Enchantment SOUL_STEALER = new EnchantmentSoulStealer(Configs.enchantID, Configs.enchantWeight);

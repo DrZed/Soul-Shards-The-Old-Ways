@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
 @Config
 public class Configs {
 	public static int enchantID = 52, enchantWeight = 8, enchantBonus = 1, spawnerBonus = 64,
-            maxEntities = 80;
+            maxEntities = 80, souliumMaterialDurability = 3120, souliumMaterialHarvestLevel = 3, souliumMaterialEnchantability = 30;
 
 	public static boolean allowAbsorb = true, bindingAbsorb, debug, personalShard, invertRedstone,
             absorbAnySpawner, useSSTOWTextures, floodPrevention = true, BossMobShards = true, newColors;
@@ -15,7 +15,7 @@ public class Configs {
 	public static byte maxspawns = 8, maxDelay = 120, delayMultiplier = 20,
             spawnrange = 4, enchantMaxLevel = 5;
 
-    public static float lightPercent = 0.25f, worldPercent = 0.75f, playerPercent = 0.5f, redstonePercent = 0.75f;
+    public static float lightPercent = 0.25f, worldPercent = 0.75f, playerPercent = 0.5f, redstonePercent = 0.75f, souliumMaterialDamage = 7f, souliumMaterialMiningSpeed = 12f;
 
 	public static LinkedHashMap<String, Tier> tiers = new LinkedHashMap<>();
 
