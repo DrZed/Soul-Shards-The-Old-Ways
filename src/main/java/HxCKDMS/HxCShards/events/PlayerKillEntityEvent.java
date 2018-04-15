@@ -118,7 +118,7 @@ public class PlayerKillEntityEvent {
 
     @SubscribeEvent
     public void attackEntity(AttackEntityEvent event) {
-	    if (event.entityPlayer.getHeldItem().getItem() == ModRegistry.ItemSwordSoul3 && event.entityPlayer.getHeldItem().hasTagCompound() && event.entityPlayer.getHeldItem().getTagCompound().hasKey("Killstreak")) {
+	    if (event.entityPlayer.getHeldItem() != null && event.entityPlayer.getHeldItem().getItem() == ModRegistry.ItemSwordSoul3 && event.entityPlayer.getHeldItem().hasTagCompound() && event.entityPlayer.getHeldItem().getTagCompound().hasKey("Killstreak")) {
 	        event.target.attackEntityFrom(new DamageSourceDoom("doomblade", event.entityPlayer), event.entityPlayer.getHeldItem().getTagCompound().getInteger("Killstreak"));
         }
     }

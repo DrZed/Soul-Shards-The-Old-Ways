@@ -109,10 +109,10 @@ public class ModRegistry {
 		// Materials
 		OreDictionary.registerOre("nuggetSoulium", new ItemStack(ItemMaterials, 1, 0));
 		OreDictionary.registerOre("ingotSoulium", new ItemStack(ItemMaterials, 1, 1));
-		OreDictionary.registerOre("dustVile", new ItemStack(ItemMaterials, 1, 3));
+		OreDictionary.registerOre("dustVile", new ItemStack(ItemMaterials, 1, 2));
 		OreDictionary.registerOre("blockSoulium", new ItemStack(BlockMaterials, 1, 0));
-		OreDictionary.registerOre("ingotSouliumImproved", new ItemStack(ItemMaterials, 1, 4));
-		OreDictionary.registerOre("ingotSouliumDraconic", new ItemStack(ItemMaterials, 1, 5));
+		OreDictionary.registerOre("ingotSouliumImproved", new ItemStack(ItemMaterials, 1, 3));
+		OreDictionary.registerOre("ingotSouliumDraconic", new ItemStack(ItemMaterials, 1, 4));
 	}
 
 	private static void registerTileEntities() {
@@ -121,16 +121,16 @@ public class ModRegistry {
 	}
 
 	private static void registerRecipes() {
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemMaterials, 9, 2), "blockSoulium"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemMaterials, 9, 1), "ingotSoulium"));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemMaterials, 9, 1), "blockSoulium"));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ItemMaterials, 9, 0), "ingotSoulium"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockForge), "SSS", "CFC", "OOO", 'S', Blocks.stone_slab, 'C', "cobblestone", 'O', Blocks.obsidian, 'F', Blocks.furnace));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemMaterials, 1, 2), "AAA", "AAA", "AAA", 'A', "nuggetSoulium"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemMaterials, 1, 1), "AAA", "AAA", "AAA", 'A', "nuggetSoulium"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockMaterials, 1, 0), "AAA", "AAA", "AAA", 'A', "ingotSoulium"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemMaterials, 1, 3), "DAD", "BAB", "DAD", 'A', "ingotSoulium", 'D', Items.diamond, 'B', Items.blaze_rod));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(BlockCage), "SIS", "IXI", "SIS", 'I', Blocks.iron_bars, 'S', "ingotSoulium"));
 
         if (!Loader.isModLoaded("Natura"))
-		    GameRegistry.addSmelting(Blocks.soul_sand, new ItemStack(ItemMaterials, 1, 3), 0.35F);
+		    GameRegistry.addSmelting(Blocks.soul_sand, new ItemStack(ItemMaterials, 1, 2), 0.35F);
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSwordSoul), "A", "A", "B", 'A', "ingotSoulium", 'B', "ingotIron"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemPickaxeSoul), "AAA", "CBC", "CBC", 'A', "ingotSoulium", 'B', "ingotIron"));
@@ -145,10 +145,10 @@ public class ModRegistry {
 
 
     private static void registerSoulForgeRecipes() {
-        sFHandler.addFuel(new ItemStack(ItemMaterials, 1, 3), 1000);
+        sFHandler.addFuel(new ItemStack(ItemMaterials, 1, 2), 1000);
         sFHandler.addFuel(new ItemStack(Items.blaze_powder, 1, 0), 50);
         sFHandler.addRecipe(new ItemStack(ItemSoulShard, 1), new ItemStack(Items.diamond), 24000);
-        sFHandler.addRecipe(new ItemStack(ItemMaterials, 1, 2), new ItemStack(Items.gold_ingot), 1800);
-        sFHandler.addRecipe(new ItemStack(ItemMaterials, 2, 3), new ItemStack(Blocks.soul_sand), 500);
+        sFHandler.addRecipe(new ItemStack(ItemMaterials, 1, 1), new ItemStack(Items.gold_ingot), 1800);
+        sFHandler.addRecipe(new ItemStack(ItemMaterials, 2, 2), new ItemStack(Blocks.soul_sand), 500);
     }
 }
