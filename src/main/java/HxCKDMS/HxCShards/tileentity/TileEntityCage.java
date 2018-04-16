@@ -14,6 +14,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChatComponentText;
 
 import java.util.List;
 
@@ -27,6 +28,8 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 	private int updateCounter;
 	private byte tier;
 	private static final int slot = 0;
+
+	private int xShift = 0, yShift = 0, zShift = 0;
 
 	private boolean redstoneActive;
 	private boolean active;
@@ -122,6 +125,36 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
         counter++;
     }
 
+    public void moveBounds(int side, EntityPlayer player) {
+		switch (side) {
+			case 0 :
+				if (yShift < 5)
+					yShift++;
+				break;
+			case 1 :
+				if (yShift > -5)
+					yShift--;
+				break;
+			case 2 :
+				if (zShift < 10)
+					zShift++;
+				break;
+			case 3 :
+				if (zShift > -10)
+					zShift--;
+				break;
+			case 4 :
+				if (xShift < 10)
+					xShift++;
+				break;
+			case 5 :
+				if (xShift > -10)
+					xShift--;
+				break;
+		}
+		player.addChatMessage(new ChatComponentText("Spawner Spawn Zone shifted by : " + xShift + " / " + yShift + " / " + zShift));
+	}
+
 	public void checkRedstone() {
 		redstoneActive = worldObj.isBlockIndirectlyGettingPowered(this.xCoord, this.yCoord, this.zCoord);
 	}
@@ -194,7 +227,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 				double x = xCoord + (worldObj.rand.nextDouble() - worldObj.rand.nextDouble()) * Configs.spawnrange;
 				double y = yCoord + worldObj.rand.nextInt(4) - 1;
 				double z = zCoord + (worldObj.rand.nextDouble() - worldObj.rand.nextDouble()) * Configs.spawnrange;
-				ent.setLocationAndAngles(x, y, z, worldObj.rand.nextFloat() * 360.0F, 0.0F);
+				ent.setLocationAndAngles(x + xShift, y + yShift, z + zShift, worldObj.rand.nextFloat() * 360.0F, 0.0F);
 			}
 			while (!canSpawnAtCoords(ent) || counter >= Configs.maxspawns);
 

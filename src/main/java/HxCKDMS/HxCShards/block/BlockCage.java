@@ -63,8 +63,10 @@ public class BlockCage extends BlockContainer {
         if (player.getHeldItem() != null && player.getHeldItem().getItem() == ModRegistry.ItemSoulShard &&
                 player.getHeldItem().hasTagCompound() && Utils.getShardTier(player.getHeldItem()) > 0)
             cage.setInventorySlotContents(0, player.inventory.decrStackSize(player.inventory.currentItem, 1));
-        else if (player.getHeldItem() == null && ((TileEntityCage) world.getTileEntity(x, y, z)).getStackInSlot(0) != null)
+        else if (player.getHeldItem() == null && player.isSneaking() && ((TileEntityCage) world.getTileEntity(x, y, z)).getStackInSlot(0) != null)
             player.inventory.setInventorySlotContents(player.inventory.currentItem, cage.getStackInSlotOnClosing(0));
+        else if (player.getHeldItem() == null && !player.isSneaking() && !player.worldObj.isRemote)
+        	cage.moveBounds(side, player);
 		return true;
 	}
 
