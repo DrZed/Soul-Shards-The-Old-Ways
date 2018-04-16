@@ -5,6 +5,7 @@ import HxCKDMS.HxCShards.utils.ModRegistry;
 import HxCKDMS.HxCShards.utils.Reference;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.FurnaceRecipeHandler;
+import codechicken.nei.recipe.IRecipeHandler;
 import net.minecraft.item.ItemStack;
 
 import java.awt.*;
@@ -13,7 +14,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class ForgeRecipeHandler extends FurnaceRecipeHandler {
+public class ForgeRecipeHandler extends FurnaceRecipeHandler implements IRecipeHandler {
 	public ArrayList<SmeltingPair> recipes = new ArrayList<>();
 
 	@Override
@@ -28,8 +29,8 @@ public class ForgeRecipeHandler extends FurnaceRecipeHandler {
 	public class SmeltingPair extends CachedRecipe {
 		public SmeltingPair(ItemStack output, ItemStack input) {
             input.stackSize = 1;
-			this.ingred = new PositionedStack(input, 51, 6);
-			this.result = new PositionedStack(output, 111, 22);
+			ingred = new PositionedStack(input, 51, 6);
+			result = new PositionedStack(output, 111, 22);
 		}
 
 		@Override

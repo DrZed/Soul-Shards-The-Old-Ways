@@ -186,6 +186,6 @@ public class ModRegistry {
         sFHandler.addFuel(new ItemStack(Items.blaze_powder, 1, 0), 50);
         sFHandler.addRecipe(new ItemStack(ItemSoulShard, 1), new ItemStack(Items.diamond), 24000);
         sFHandler.addRecipe(new ItemStack(ItemMaterials, 1, 1), new ItemStack(Items.gold_ingot), 1800);
-        sFHandler.addRecipe(new ItemStack(ItemMaterials, 2, 2), new ItemStack(Blocks.soul_sand), 500);
+        sFHandler.addRecipe(new ItemStack(ItemMaterials, 1, 2), new ItemStack(Blocks.soul_sand), 500);
     }
 }

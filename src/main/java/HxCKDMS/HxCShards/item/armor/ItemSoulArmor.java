@@ -5,6 +5,7 @@ import HxCKDMS.HxCShards.utils.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
@@ -61,22 +62,31 @@ public class ItemSoulArmor extends ItemArmor {
 		armorIcons[2] = iconRegister.registerIcon(Reference.modID + ":armor/legsSoulium");
 		armorIcons[3] = iconRegister.registerIcon(Reference.modID + ":armor/bootsSoulium");
 
-		armorIcons[4] = iconRegister.registerIcon(Reference.modID + ":armor/helmSoul2ium");
-		armorIcons[5] = iconRegister.registerIcon(Reference.modID + ":armor/chestSoul2ium");
-		armorIcons[6] = iconRegister.registerIcon(Reference.modID + ":armor/legsSoul2ium");
-		armorIcons[7] = iconRegister.registerIcon(Reference.modID + ":armor/bootsSoul2ium");
+		armorIcons[4] = iconRegister.registerIcon(Reference.modID + ":armor/helmSoulium2");
+		armorIcons[5] = iconRegister.registerIcon(Reference.modID + ":armor/chestSoulium2");
+		armorIcons[6] = iconRegister.registerIcon(Reference.modID + ":armor/legsSoulium2");
+		armorIcons[7] = iconRegister.registerIcon(Reference.modID + ":armor/bootsSoulium2");
 
-		armorIcons[8] = iconRegister.registerIcon(Reference.modID + ":armor/helmSoul3ium");
-		armorIcons[9] = iconRegister.registerIcon(Reference.modID + ":armor/chestSoul3ium");
-		armorIcons[10] = iconRegister.registerIcon(Reference.modID + ":armor/legsSoul3ium");
-		armorIcons[11] = iconRegister.registerIcon(Reference.modID + ":armor/bootsSoul3ium");
+		armorIcons[8] = iconRegister.registerIcon(Reference.modID + ":armor/helmSoulium3");
+		armorIcons[9] = iconRegister.registerIcon(Reference.modID + ":armor/chestSoulium3");
+		armorIcons[10] = iconRegister.registerIcon(Reference.modID + ":armor/legsSoulium3");
+		armorIcons[11] = iconRegister.registerIcon(Reference.modID + ":armor/bootsSoulium3");
 	}
 
-    @Override
+	@Override
+	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
+		if (getTier(stack.getItem()) == 0)
+			return Reference.modID + ":textures/models/armor/soulium_layer_" + (stack.getItem() == ModRegistry.ItemSoulLeg ? "2" : "1") + ".png";
+		if (getTier(stack.getItem()) == 1)
+			return Reference.modID + ":textures/models/armor/improved_soulium_layer_" + (stack.getItem() == ModRegistry.ItemSoulLeg2 ? "2" : "1") + ".png";
+		if (getTier(stack.getItem()) == 2)
+			return Reference.modID + ":textures/models/armor/draconic_soulium_layer_" + (stack.getItem() == ModRegistry.ItemSoulLeg3 ? "2" : "1") + ".png";
+		return super.getArmorTexture(stack, entity, slot, type);
+	}
+
+	@Override
     public IIcon getIconIndex(ItemStack stack) {
-		if (((ItemArmor)stack.getItem()).armorType == 0)
-			return armorIcons[getTier(stack.getItem()) * 4 + ((ItemArmor)stack.getItem()).armorType];
-        return itemIcon;
+		return armorIcons[getTier(stack.getItem()) * 4 + ((ItemArmor)stack.getItem()).armorType];
     }
 
     @Override
