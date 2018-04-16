@@ -12,7 +12,7 @@ public class Configs {
 
 	public static boolean allowAbsorb = true, bindingAbsorb, debug, personalShard, invertRedstone,
             absorbAnySpawner, useSSTOWTextures, floodPrevention = true, BossMobShards = true, newColors,
-			Tier3BossBonusByHP = true, Tier3BossBonus = true, harderSoulgems = false;
+			Tier3BossBonusByHP = true, Tier3BossBonus = true, harderSoulgems = false, alternateRecipe = false;
 
 	public static byte maxspawns = 8, maxDelay = 120, delayMultiplier = 20,
             spawnrange = 4, enchantMaxLevel = 5;

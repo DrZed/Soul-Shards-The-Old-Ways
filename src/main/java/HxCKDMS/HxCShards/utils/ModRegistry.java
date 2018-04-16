@@ -235,16 +235,18 @@ public class ModRegistry {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSoulLegs), "AAA", "A A", "A A", 'A', "ingotSoulium"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSoulBoots), "A A", "A A", "   ", 'A', "ingotSoulium"));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSwordSoul2), "A", "C", "B", 'A', "ingotSouliumImproved", 'B', "ingotIron", 'C', ItemSwordSoul));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemPickaxeSoul2), "AAA", " B ", " B ", 'A', "ingotSouliumImproved", 'B', "ingotIron", 'C', ItemPickaxeSoul));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemAxeSoul2), " AA", " BA", " B ", 'A', "ingotSouliumImproved", 'B', "ingotIron", 'C', ItemAxeSoul));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSpadeSoul2), "A", "C", "B", 'A', "ingotSouliumImproved", 'B', "ingotIron", 'C', ItemSpadeSoul));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemBowSoul2), " AB", "A C", " AB", 'A', "ingotSouliumImproved", 'B', "ingotIron", 'C', ItemBowSoul));
+		if (!Configs.alternateRecipe) {
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSwordSoul2), "A", "C", "B", 'A', "ingotSouliumImproved", 'B', "ingotIron", 'C', ItemSwordSoul));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemPickaxeSoul2), "AAA", " B ", " B ", 'A', "ingotSouliumImproved", 'B', "ingotIron", 'C', ItemPickaxeSoul));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemAxeSoul2), " AA", " BA", " B ", 'A', "ingotSouliumImproved", 'B', "ingotIron", 'C', ItemAxeSoul));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSpadeSoul2), "A", "C", "B", 'A', "ingotSouliumImproved", 'B', "ingotIron", 'C', ItemSpadeSoul));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemBowSoul2), " AB", "A C", " AB", 'A', "ingotSouliumImproved", 'B', "ingotIron", 'C', ItemBowSoul));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSoulHelm), "ABA", "A A", "   ", 'A', "ingotSouliumImproved", 'B', ItemSoulHelm));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSoulChest), "A A", "ABA", "AAA", 'A', "ingotSouliumImproved", 'B', ItemSoulChest));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSoulLegs), "ABA", "A A", "A A", 'A', "ingotSouliumImproved", 'B', ItemSoulLegs));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSoulBoots), "A A", "ABA", "   ", 'A', "ingotSouliumImproved", 'B', ItemSoulBoots));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSoulHelm2), "ABA", "A A", "   ", 'A', "ingotSouliumImproved", 'B', ItemSoulHelm));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSoulChest2), "A A", "ABA", "AAA", 'A', "ingotSouliumImproved", 'B', ItemSoulChest));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSoulLegs2), "ABA", "A A", "A A", 'A', "ingotSouliumImproved", 'B', ItemSoulLegs));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSoulBoots2), "A A", "ABA", "   ", 'A', "ingotSouliumImproved", 'B', ItemSoulBoots));
+		}
 	}
 
 

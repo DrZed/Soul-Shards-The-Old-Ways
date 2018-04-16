@@ -7,6 +7,7 @@ import net.minecraft.block.BlockDragonEgg;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
@@ -17,16 +18,7 @@ import java.util.List;
 public class EventSoulRitual {
     @SubscribeEvent
     public void itemDropInWorld(ItemTossEvent event) {
-        if ((event.entityItem.getEntityItem().getItem() == ModRegistry.ItemMaterials && event.entityItem.getEntityItem().getItemDamage() == 3) ||
-                event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSwordSoul2 ||
-                event.entityItem.getEntityItem().getItem() == ModRegistry.ItemPickaxeSoul2 ||
-                event.entityItem.getEntityItem().getItem() == ModRegistry.ItemAxeSoul2 ||
-                event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSpadeSoul2 ||
-                event.entityItem.getEntityItem().getItem() == ModRegistry.ItemBowSoul2 ||
-                event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSoulHelm2 ||
-                event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSoulChest2 ||
-                event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSoulLegs2 ||
-                event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSoulBoots2) {
+        if ((event.entityItem.getEntityItem().getItem() == ModRegistry.ItemMaterials && event.entityItem.getEntityItem().getItemDamage() == 3) || getTier(event.entityItem.getEntityItem().getItem()) < 2) {
             int x = (int) Math.round(event.entityItem.posX);
             int y = (int) Math.round(event.entityItem.posY - 2);
             int z = (int) Math.round(event.entityItem.posZ);
@@ -43,7 +35,7 @@ public class EventSoulRitual {
                     hasStars[0] = true;
                     items[0] = i;
                 }
-                if (i.getEntityItem().getItem() == ModRegistry.ItemMaterials && i.getEntityItem().getItemDamage() == 4 && i.getEntityItem().stackSize >= 4) {
+                if (i.getEntityItem().getItem() == ModRegistry.ItemMaterials && (i.getEntityItem().getItemDamage() == 3 || i.getEntityItem().getItemDamage() == 4) && i.getEntityItem().stackSize >= 4) {
                     hasBars[0] = true;
                     items[0] = i;
                 }
@@ -71,24 +63,48 @@ public class EventSoulRitual {
                                 event.entityItem.setDead();
                                 items[0].setDead();
                                 clearStructure(world, j, i, k);
-                                if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSwordSoul2) {
-                                    world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemSwordSoul3)));
-                                } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemAxeSoul2) {
-                                    world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemAxeSoul3)));
-                                } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemPickaxeSoul2) {
-                                    world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemPickaxeSoul3)));
-                                } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSpadeSoul2) {
-                                    world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemSpadeSoul3)));
-                                } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemBowSoul2) {
-                                    world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemBowSoul3)));
-                                } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSoulHelm2) {
-                                    world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemSoulHelm3)));
-                                } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSoulChest2) {
-                                    world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemSoulChest3)));
-                                } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSoulLegs2) {
-                                    world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemSoulLegs3)));
-                                } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSoulBoots2) {
-                                    world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemSoulBoots3)));
+                                if (items[0].getEntityItem().getItemDamage() == 4) {
+                                    if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSwordSoul2) {
+                                        world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemSwordSoul3)));
+                                    } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemAxeSoul2) {
+                                        world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemAxeSoul3)));
+                                    } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemPickaxeSoul2) {
+                                        world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemPickaxeSoul3)));
+                                    } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSpadeSoul2) {
+                                        world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemSpadeSoul3)));
+                                    } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemBowSoul2) {
+                                        world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemBowSoul3)));
+                                    } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSoulHelm2) {
+                                        world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemSoulHelm3)));
+                                    } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSoulChest2) {
+                                        world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemSoulChest3)));
+                                    } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSoulLegs2) {
+                                        world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemSoulLegs3)));
+                                    } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSoulBoots2) {
+                                        world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemSoulBoots2)));
+                                    }
+                                }
+
+                                if (items[0].getEntityItem().getItemDamage() == 3) {
+                                    if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSwordSoul) {
+                                        world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemSwordSoul2)));
+                                    } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemAxeSoul) {
+                                        world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemAxeSoul2)));
+                                    } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemPickaxeSoul) {
+                                        world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemPickaxeSoul2)));
+                                    } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSpadeSoul) {
+                                        world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemSpadeSoul2)));
+                                    } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemBowSoul) {
+                                        world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemBowSoul2)));
+                                    } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSoulHelm) {
+                                        world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemSoulHelm2)));
+                                    } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSoulChest) {
+                                        world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemSoulChest2)));
+                                    } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSoulLegs) {
+                                        world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemSoulLegs2)));
+                                    } else if (event.entityItem.getEntityItem().getItem() == ModRegistry.ItemSoulBoots) {
+                                        world.spawnEntityInWorld(new EntityItem(world, x, y, z, new ItemStack(ModRegistry.ItemSoulBoots2)));
+                                    }
                                 }
                             }
                         }
@@ -96,6 +112,31 @@ public class EventSoulRitual {
                 }
             }
         }
+    }
+
+    private byte getTier(Item item) {
+        if (item == ModRegistry.ItemSwordSoul2
+         || item == ModRegistry.ItemPickaxeSoul2
+         || item == ModRegistry.ItemAxeSoul2
+         || item == ModRegistry.ItemSpadeSoul2
+         || item == ModRegistry.ItemBowSoul2
+         || item == ModRegistry.ItemSoulHelm2
+         || item == ModRegistry.ItemSoulChest2
+         || item == ModRegistry.ItemSoulLegs2
+         || item == ModRegistry.ItemSoulBoots2)
+            return 1;
+
+        if (item == ModRegistry.ItemSwordSoul
+                || item == ModRegistry.ItemPickaxeSoul
+                || item == ModRegistry.ItemAxeSoul
+                || item == ModRegistry.ItemSpadeSoul
+                || item == ModRegistry.ItemBowSoul
+                || item == ModRegistry.ItemSoulHelm
+                || item == ModRegistry.ItemSoulChest
+                || item == ModRegistry.ItemSoulLegs
+                || item == ModRegistry.ItemSoulBoots)
+            return 0;
+        return 2;
     }
 
     public void clearStructure(World world, int x, int y, int z) {
