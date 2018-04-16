@@ -38,18 +38,17 @@ public class ItemSwordSoul extends ItemSword {
 
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean boo) {
-		if (stack.getItem() == ModRegistry.ItemSwordSoul3 && stack.hasTagCompound() && stack.getTagCompound().hasKey("Killstreak")) {
+		if (stack.getItem() == ModRegistry.ItemSwordSoul3 && stack.hasTagCompound() && stack.getTagCompound().hasKey("Killstreak"))
 			list.add("\u00a74Bonus Damage : " + stack.getTagCompound().getInteger("Killstreak"));
-		}
 		super.addInformation(stack, player, list, boo);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		itemIcon = iconRegister.registerIcon(Reference.modID + ":swordSoul" + (Configs.useSSTOWTextures ? "_old" : ""));
-		itemIcon2 = iconRegister.registerIcon(Reference.modID + ":swordImprovedSoul");
-		itemIcon3 = iconRegister.registerIcon(Reference.modID + ":swordDraconicSoul");
+		itemIcon = iconRegister.registerIcon(Reference.modID + ":tools/swordSoul" + (Configs.useSSTOWTextures ? "_old" : ""));
+		itemIcon2 = iconRegister.registerIcon(Reference.modID + ":tools/swordImprovedSoul");
+		itemIcon3 = iconRegister.registerIcon(Reference.modID + ":tools/swordDraconicSoul");
 	}
 
     @Override

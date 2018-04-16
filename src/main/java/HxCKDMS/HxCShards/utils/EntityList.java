@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 @Config
-public class Entitylist {
+public class EntityList {
 	public static HashMap<String, Boolean> wList = new HashMap<>();
 
 	public void init() {

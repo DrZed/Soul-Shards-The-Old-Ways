@@ -4,7 +4,6 @@ import HxCKDMS.HxCShards.HxCShards;
 import HxCKDMS.HxCShards.utils.*;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.EntityMob;
@@ -35,7 +34,7 @@ public class PlayerKillEntityEvent {
 
             String entName = "";
 			try {
-				entName = EntityList.getEntityString(victim);
+				entName = net.minecraft.entity.EntityList.getEntityString(victim);
 			} catch (Exception e) {
                 if (!HxCShards.logDump.containsKey(victim.getCommandSenderName()))
                     HxCShards.logDump.putIfAbsent(victim.getCommandSenderName(), "Victim : " + victim.getCommandSenderName() + " | " + victim.getClass().getTypeName() + " | " + victim.getClass().getName()
@@ -44,7 +43,7 @@ public class PlayerKillEntityEvent {
 				e.printStackTrace();
 			}
 
-            if (entName.isEmpty() || (!Entitylist.wList.keySet().contains(entName) || !Entitylist.wList.get(entName)) || !EntityMapper.isEntityValid(entName)) {
+            if (entName.isEmpty() || (!EntityList.wList.keySet().contains(entName) || !EntityList.wList.get(entName)) || !EntityMapper.isEntityValid(entName)) {
                 if (!HxCShards.logDump.containsKey(victim.getCommandSenderName()))
                     HxCShards.logDump.putIfAbsent(victim.getCommandSenderName(), "Victim : " + victim.getCommandSenderName() + " | " + victim.getClass().getTypeName() + " | " + victim.getClass().getName()
                     + " | " + victim.getClass().getCanonicalName() + " | " + victim.getClass().getSimpleName() + " Player : " +

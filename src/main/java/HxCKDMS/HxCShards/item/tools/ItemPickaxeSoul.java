@@ -37,9 +37,9 @@ public class ItemPickaxeSoul extends ItemPickaxe {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-        itemIcon = iconRegister.registerIcon(Reference.modID + ":pickaxeSoul" + (Configs.useSSTOWTextures ? "_old" : ""));
-		itemIcon2 = iconRegister.registerIcon(Reference.modID + ":pickaxeImprovedSoul");
-		itemIcon3 = iconRegister.registerIcon(Reference.modID + ":pickaxeDraconicSoul");
+        itemIcon = iconRegister.registerIcon(Reference.modID + ":tools/pickaxeSoul" + (Configs.useSSTOWTextures ? "_old" : ""));
+		itemIcon2 = iconRegister.registerIcon(Reference.modID + ":tools/pickaxeImprovedSoul");
+		itemIcon3 = iconRegister.registerIcon(Reference.modID + ":tools/pickaxeDraconicSoul");
 	}
 
 	@Override

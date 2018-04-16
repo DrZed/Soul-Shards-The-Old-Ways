@@ -36,9 +36,9 @@ public class ItemSpadeSoul extends ItemSpade {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		itemIcon = iconRegister.registerIcon(Reference.modID + ":spadeSoul" + (Configs.useSSTOWTextures ? "_old" : ""));
-		itemIcon2 = iconRegister.registerIcon(Reference.modID + ":spadeImprovedSoul");
-		itemIcon3 = iconRegister.registerIcon(Reference.modID + ":spadeDraconicSoul");
+		itemIcon = iconRegister.registerIcon(Reference.modID + ":tools/spadeSoul" + (Configs.useSSTOWTextures ? "_old" : ""));
+		itemIcon2 = iconRegister.registerIcon(Reference.modID + ":tools/spadeImprovedSoul");
+		itemIcon3 = iconRegister.registerIcon(Reference.modID + ":tools/spadeDraconicSoul");
 	}
 
 	@Override

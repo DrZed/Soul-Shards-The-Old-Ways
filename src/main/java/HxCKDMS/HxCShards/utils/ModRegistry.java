@@ -9,6 +9,7 @@ import HxCKDMS.HxCShards.events.Achievements;
 import HxCKDMS.HxCShards.guihandler.GuiHandler;
 import HxCKDMS.HxCShards.item.ItemMaterials;
 import HxCKDMS.HxCShards.item.ItemSoulShard;
+import HxCKDMS.HxCShards.item.armor.ItemSoulArmor;
 import HxCKDMS.HxCShards.item.blocks.ItemBlockMaterials;
 import HxCKDMS.HxCShards.item.tools.ItemAxeSoul;
 import HxCKDMS.HxCShards.item.tools.ItemPickaxeSoul;
@@ -25,17 +26,23 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
+@SuppressWarnings("WeakerAccess")
 public class ModRegistry {
 	// Tool material for the soul tools/sword
 	private static ToolMaterial SOULIUM = EnumHelper.addToolMaterial("SOULIUM", Configs.souliumMaterialHarvestLevel, Configs.souliumMaterialDurability, Configs.souliumMaterialMiningSpeed, Configs.souliumMaterialDamage, Configs.souliumMaterialEnchantability);
-	private static ToolMaterial IMPROVED_SOULIUM = EnumHelper.addToolMaterial("IMPROVED_SOULIUM", Configs.souliumMaterialHarvestLevel * 2, Math.round(Configs.souliumMaterialDurability * 2.5f), Configs.souliumMaterialMiningSpeed * 1.5f, Configs.souliumMaterialDamage * 1.3f, Math.round( Configs.souliumMaterialEnchantability * 1.5f));
+	private static ToolMaterial IMPROVED_SOULIUM = EnumHelper.addToolMaterial("IMPROVED_SOULIUM", Configs.souliumMaterialHarvestLevel * 2, Math.round(Configs.souliumMaterialDurability * 2.5f), Configs.souliumMaterialMiningSpeed * 1.5f, Configs.souliumMaterialDamage * 1.3f, Math.round(Configs.souliumMaterialEnchantability * 1.5f));
 	private static ToolMaterial DRACONIC_SOULIUM = EnumHelper.addToolMaterial("DRACONIC_SOULIUM", Configs.souliumMaterialHarvestLevel * 5, Configs.souliumMaterialDurability * 15, Configs.souliumMaterialMiningSpeed * 8f, Configs.souliumMaterialDamage * 2.25f, Configs.souliumMaterialEnchantability * 2);
+
+	private static ItemArmor.ArmorMaterial SOULIUM_A = EnumHelper.addArmorMaterial("SOULIUM", Configs.souliumMaterialDurability, new int[]{2, 5, 4, 2}, Configs.souliumMaterialEnchantability);
+	private static ItemArmor.ArmorMaterial IMPROVED_SOULIUM_A = EnumHelper.addArmorMaterial("IMPROVED_SOULIUM", Configs.souliumMaterialDurability * 2, new int[]{3, 8, 5, 3}, Math.round(Configs.souliumMaterialEnchantability * 1.5f));
+	private static ItemArmor.ArmorMaterial DRACONIC_SOULIUM_A = EnumHelper.addArmorMaterial("DRACONIC_SOULIUM", Configs.souliumMaterialDurability * 5, new int[]{4, 9, 6, 4}, Configs.souliumMaterialEnchantability * 2);
 
 	// Setting up the enchantment details from the config
 	public static Enchantment SOUL_STEALER = new EnchantmentSoulStealer(Configs.enchantID, Configs.enchantWeight);
@@ -64,17 +71,32 @@ public class ModRegistry {
 	public static Item ItemAxeSoul3 = new ItemAxeSoul(DRACONIC_SOULIUM);
 	public static Item ItemSpadeSoul3 = new ItemSpadeSoul(DRACONIC_SOULIUM);
 
+	public static Item ItemSoulHelm = new ItemSoulArmor(SOULIUM_A, 0);
+	public static Item ItemSoulChest = new ItemSoulArmor(SOULIUM_A, 1);
+	public static Item ItemSoulLeg = new ItemSoulArmor(SOULIUM_A, 2);
+	public static Item ItemSoulBoots = new ItemSoulArmor(SOULIUM_A, 3);
+
+	public static Item ItemSoulHelm2 = new ItemSoulArmor(IMPROVED_SOULIUM_A, 0);
+	public static Item ItemSoulChest2 = new ItemSoulArmor(IMPROVED_SOULIUM_A, 1);
+	public static Item ItemSoulLeg2 = new ItemSoulArmor(IMPROVED_SOULIUM_A, 2);
+	public static Item ItemSoulBoots2 = new ItemSoulArmor(IMPROVED_SOULIUM_A, 3);
+
+	public static Item ItemSoulHelm3 = new ItemSoulArmor(DRACONIC_SOULIUM_A, 0);
+	public static Item ItemSoulChest3 = new ItemSoulArmor(DRACONIC_SOULIUM_A, 1);
+	public static Item ItemSoulLeg3 = new ItemSoulArmor(DRACONIC_SOULIUM_A, 2);
+	public static Item ItemSoulBoots3 = new ItemSoulArmor(DRACONIC_SOULIUM_A, 3);
+
 	// Set up the mod blocks
 	public static Block BlockCage = new BlockCage();
 	public static Block BlockForge = new BlockForge().setCreativeTab(CREATIVE_TAB);
 	public static Block BlockMaterials = new BlockMaterials();
 
-	public static void registerObjs() {
+	public static void registerObjects() {
 		NetworkRegistry.INSTANCE.registerGuiHandler(HxCShards.modInstance, new GuiHandler());
 
 		registerItems();
 		registerBlocks();
-		registerOreDictEntries();
+		registerOreDictionaryEntries();
 		registerTileEntities();
 		registerRecipes();
         sFHandler = new SFRecipeHandler();
@@ -97,6 +119,21 @@ public class ModRegistry {
 		GameRegistry.registerItem(ItemPickaxeSoul3, "ItemPickaxeSoul3");
 		GameRegistry.registerItem(ItemAxeSoul3, "ItemAxeSoul3");
 		GameRegistry.registerItem(ItemSpadeSoul3, "ItemSpadeSoul3");
+
+		GameRegistry.registerItem(ItemSoulHelm, "ItemSoulHelm");
+		GameRegistry.registerItem(ItemSoulChest, "ItemSoulChest");
+		GameRegistry.registerItem(ItemSoulLeg, "ItemSoulLeg");
+		GameRegistry.registerItem(ItemSoulBoots, "ItemSoulBoots");
+
+		GameRegistry.registerItem(ItemSoulHelm2, "ItemSoulHelm2");
+		GameRegistry.registerItem(ItemSoulChest2, "ItemSoulChest2");
+		GameRegistry.registerItem(ItemSoulLeg2, "ItemSoulLeg2");
+		GameRegistry.registerItem(ItemSoulBoots2, "ItemSoulBoots2");
+
+		GameRegistry.registerItem(ItemSoulHelm3, "ItemSoulHelm3");
+		GameRegistry.registerItem(ItemSoulChest3, "ItemSoulChest3");
+		GameRegistry.registerItem(ItemSoulLeg3, "ItemSoulLeg3");
+		GameRegistry.registerItem(ItemSoulBoots3, "ItemSoulBoots3");
 	}
 
 	private static void registerBlocks() {
@@ -105,7 +142,7 @@ public class ModRegistry {
 		GameRegistry.registerBlock(BlockCage, "BlockCage");
 	}
 
-	private static void registerOreDictEntries() {
+	private static void registerOreDictionaryEntries() {
 		// Materials
 		OreDictionary.registerOre("nuggetSoulium", new ItemStack(ItemMaterials, 1, 0));
 		OreDictionary.registerOre("ingotSoulium", new ItemStack(ItemMaterials, 1, 1));

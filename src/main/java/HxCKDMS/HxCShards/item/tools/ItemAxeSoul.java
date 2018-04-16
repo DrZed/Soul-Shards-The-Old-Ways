@@ -36,9 +36,9 @@ public class ItemAxeSoul extends ItemAxe {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		itemIcon = iconRegister.registerIcon(Reference.modID + ":axeSoul" + (Configs.useSSTOWTextures ? "_old" : ""));
-		itemIcon2 = iconRegister.registerIcon(Reference.modID + ":axeImprovedSoul");
-		itemIcon3 = iconRegister.registerIcon(Reference.modID + ":axeDraconicSoul");
+		itemIcon = iconRegister.registerIcon(Reference.modID + ":tools/axeSoul" + (Configs.useSSTOWTextures ? "_old" : ""));
+		itemIcon2 = iconRegister.registerIcon(Reference.modID + ":tools/axeImprovedSoul");
+		itemIcon3 = iconRegister.registerIcon(Reference.modID + ":tools/axeDraconicSoul");
 	}
 
 	@Override

@@ -51,7 +51,7 @@ public class TileEntityCage extends TileEntity implements ISidedInventory {
 		if (worldObj.isRemote || entName.isEmpty() || shard == null)
 			return;
 
-		if (!Entitylist.wList.keySet().contains(entName) && !Entitylist.wList.get(entName) || shard == null)
+		if (!EntityList.wList.keySet().contains(entName) && !EntityList.wList.get(entName) || shard == null)
 			return;
 
         checkRedstone();

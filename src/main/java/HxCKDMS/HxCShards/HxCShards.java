@@ -37,8 +37,8 @@ public class HxCShards {
 	@Instance(Reference.modID)
 	public static HxCShards modInstance;
 
-	public static Entitylist elist;
-    public static HxCConfig config, entlist;
+	public static EntityList entityList;
+    public static HxCConfig config, entityListConfig;
     public static HashMap<String, TileEntityCage> spawners = new HashMap<>();
     public static HashMap<String, String> logDump = new HashMap<>();
 
@@ -65,7 +65,7 @@ public class HxCShards {
 		MinecraftForge.EVENT_BUS.register(new AchievementEvents());
 		FMLCommonHandler.instance().bus().register(new AchievementEvents());
 
-        ModRegistry.registerObjs();
+        ModRegistry.registerObjects();
 
         EntityMapper.init();
 
@@ -74,10 +74,10 @@ public class HxCShards {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		elist = new Entitylist();
-		elist.init();
-		entlist = new HxCConfig(Entitylist.class, "HxCSoulShards-EntityList", GlobalVariables.modConfigDir, "cfg", Reference.modID);
-        entlist.initConfiguration();
+		entityList = new EntityList();
+		entityList.init();
+		entityListConfig = new HxCConfig(EntityList.class, "HxCSoulShards-EntityList", GlobalVariables.modConfigDir, "cfg", Reference.modID);
+        entityListConfig.initConfiguration();
 	}
 
 	@EventHandler
