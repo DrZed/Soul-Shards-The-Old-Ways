@@ -25,7 +25,7 @@ public class ItemSoulArmor extends ItemArmor {
 	}
 
 	public String getUnlocalizedName(ItemStack stack) {
-		String name = Reference.modName + ".soularmor.chest";
+		String name = Reference.modName;
 		switch (getTier(stack.getItem())) {
 			case 1: name += ".soularmor2";
 				break;
@@ -76,11 +76,11 @@ public class ItemSoulArmor extends ItemArmor {
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
 		if (getTier(stack.getItem()) == 0)
-			return Reference.modID + ":textures/models/armor/soulium_layer_" + (stack.getItem() == ModRegistry.ItemSoulLeg ? "2" : "1") + ".png";
+			return Reference.modID + ":textures/models/armor/soulium_layer_" + (stack.getItem() == ModRegistry.ItemSoulLegs ? "2" : "1") + ".png";
 		if (getTier(stack.getItem()) == 1)
-			return Reference.modID + ":textures/models/armor/improved_soulium_layer_" + (stack.getItem() == ModRegistry.ItemSoulLeg2 ? "2" : "1") + ".png";
+			return Reference.modID + ":textures/models/armor/improved_soulium_layer_" + (stack.getItem() == ModRegistry.ItemSoulLegs2 ? "2" : "1") + ".png";
 		if (getTier(stack.getItem()) == 2)
-			return Reference.modID + ":textures/models/armor/draconic_soulium_layer_" + (stack.getItem() == ModRegistry.ItemSoulLeg3 ? "2" : "1") + ".png";
+			return Reference.modID + ":textures/models/armor/draconic_soulium_layer_" + (stack.getItem() == ModRegistry.ItemSoulLegs3 ? "2" : "1") + ".png";
 		return super.getArmorTexture(stack, entity, slot, type);
 	}
 
@@ -95,9 +95,9 @@ public class ItemSoulArmor extends ItemArmor {
     }
 
     private byte getTier(Item item) {
-		if (item == ModRegistry.ItemSoulHelm2 || item == ModRegistry.ItemSoulChest2 || item == ModRegistry.ItemSoulLeg2 || item == ModRegistry.ItemSoulBoots2)
+		if (item == ModRegistry.ItemSoulHelm2 || item == ModRegistry.ItemSoulChest2 || item == ModRegistry.ItemSoulLegs2 || item == ModRegistry.ItemSoulBoots2)
 			return 1;
-		if (item == ModRegistry.ItemSoulHelm3 || item == ModRegistry.ItemSoulChest3 || item == ModRegistry.ItemSoulLeg3 || item == ModRegistry.ItemSoulBoots3)
+		if (item == ModRegistry.ItemSoulHelm3 || item == ModRegistry.ItemSoulChest3 || item == ModRegistry.ItemSoulLegs3 || item == ModRegistry.ItemSoulBoots3)
 			return 2;
 		return 0;
 	}

@@ -5,11 +5,14 @@ import HxCKDMS.HxCShards.utils.ModRegistry;
 import HxCKDMS.HxCShards.utils.Reference;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.util.IIcon;
+
+import java.util.List;
 
 public class ItemAxeSoul extends ItemAxe {
 	@SideOnly(Side.CLIENT)
@@ -31,6 +34,13 @@ public class ItemAxeSoul extends ItemAxe {
 		if (stack.getItem() == ModRegistry.ItemAxeSoul3)
 			return Reference.modName + ".soultool3.axe";
 		return Reference.modName + ".soultool.axe";
+	}
+
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean boo) {
+		if (stack.getItem() == ModRegistry.ItemAxeSoul3 && stack.hasTagCompound() && stack.getTagCompound().hasKey("Killstreak"))
+			list.add("\u00a74Bonus Damage : " + stack.getTagCompound().getInteger("Killstreak"));
+		super.addInformation(stack, player, list, boo);
 	}
 
 	@SideOnly(Side.CLIENT)

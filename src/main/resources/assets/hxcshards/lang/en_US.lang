@@ -16,14 +16,36 @@ HxCShards.soultool.sword.name=Soul Blade
 HxCShards.soultool.pickaxe.name=Soul Pickaxe
 HxCShards.soultool.axe.name=Soul Axe
 HxCShards.soultool.spade.name=Soul Spade
+
 HxCShards.soultool2.sword.name=Improved Soul Blade
 HxCShards.soultool2.pickaxe.name=Improved Soul Pickaxe
 HxCShards.soultool2.axe.name=Improved Soul Axe
 HxCShards.soultool2.spade.name=Improved Soul Spade
+
 HxCShards.soultool3.sword.name=Doom Blade
 HxCShards.soultool3.pickaxe.name=Doom Pickaxe
 HxCShards.soultool3.axe.name=Doom Axe
 HxCShards.soultool3.spade.name=Doom Spade
+
+HxCShards.soultool.bow.name=Soul Bow
+HxCShards.soultool2.bow.name=Improved Soul Bow
+HxCShards.soultool3.bow.name=Doom Bow
+
+# Armors
+HxCShards.soularmor.helm.name=Soul Helmet
+HxCShards.soularmor.chest.name=Soul Chestplate
+HxCShards.soularmor.leggings.name=Soul Leggings
+HxCShards.soularmor.boots.name=Soul Boots
+
+HxCShards.soularmor2.helm.name=Improved Soul Helmet
+HxCShards.soularmor2.chest.name=Improved Soul Chestplate
+HxCShards.soularmor2.leggings.name=Improved Soul Leggings
+HxCShards.soularmor2.boots.name=Improved Soul Boots
+
+HxCShards.soularmor3.helm.name=Doom Helmet
+HxCShards.soularmor3.chest.name=Doom Chestplate
+HxCShards.soularmor3.leggings.name=Doom Leggings
+HxCShards.soularmor3.boots.name=Doom Boots
 
 # Blocks
 HxCShards.soul_forge.name=Soul Forge

@@ -54,9 +54,11 @@ public class HxCShards {
 		Configs.init();
 		config.initConfiguration();
 
-		MinecraftForge.EVENT_BUS.register(new EventCreateDSoulium());
+		MinecraftForge.EVENT_BUS.register(new EventSoulRitual());
 
 		MinecraftForge.EVENT_BUS.register(new EventMineBlock());
+
+		MinecraftForge.EVENT_BUS.register(new PlayerHurtEvent());
 
 		MinecraftForge.EVENT_BUS.register(new PlayerKillEntityEvent());
 

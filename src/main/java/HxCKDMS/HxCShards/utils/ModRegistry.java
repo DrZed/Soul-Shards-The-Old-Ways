@@ -11,10 +11,7 @@ import HxCKDMS.HxCShards.item.ItemMaterials;
 import HxCKDMS.HxCShards.item.ItemSoulShard;
 import HxCKDMS.HxCShards.item.armor.ItemSoulArmor;
 import HxCKDMS.HxCShards.item.blocks.ItemBlockMaterials;
-import HxCKDMS.HxCShards.item.tools.ItemAxeSoul;
-import HxCKDMS.HxCShards.item.tools.ItemPickaxeSoul;
-import HxCKDMS.HxCShards.item.tools.ItemSpadeSoul;
-import HxCKDMS.HxCShards.item.tools.ItemSwordSoul;
+import HxCKDMS.HxCShards.item.tools.*;
 import HxCKDMS.HxCShards.tileentity.TileEntityCage;
 import HxCKDMS.HxCShards.tileentity.TileEntityForge;
 import cpw.mods.fml.common.Loader;
@@ -41,8 +38,8 @@ public class ModRegistry {
 	private static ToolMaterial DRACONIC_SOULIUM = EnumHelper.addToolMaterial("DRACONIC_SOULIUM", Configs.souliumMaterialHarvestLevel * 5, Configs.souliumMaterialDurability * 15, Configs.souliumMaterialMiningSpeed * 8f, Configs.souliumMaterialDamage * 2.25f, Configs.souliumMaterialEnchantability * 2);
 
 	private static ItemArmor.ArmorMaterial SOULIUM_A = EnumHelper.addArmorMaterial("SOULIUM", Configs.souliumMaterialDurability, new int[]{2, 5, 4, 2}, Configs.souliumMaterialEnchantability);
-	private static ItemArmor.ArmorMaterial IMPROVED_SOULIUM_A = EnumHelper.addArmorMaterial("IMPROVED_SOULIUM", Configs.souliumMaterialDurability * 2, new int[]{3, 8, 5, 3}, Math.round(Configs.souliumMaterialEnchantability * 1.5f));
-	private static ItemArmor.ArmorMaterial DRACONIC_SOULIUM_A = EnumHelper.addArmorMaterial("DRACONIC_SOULIUM", Configs.souliumMaterialDurability * 5, new int[]{4, 9, 6, 4}, Configs.souliumMaterialEnchantability * 2);
+	private static ItemArmor.ArmorMaterial IMPROVED_SOULIUM_A = EnumHelper.addArmorMaterial("IMPROVED_SOULIUM", Configs.souliumMaterialDurability * 2, new int[]{3, 6, 5, 3}, Math.round(Configs.souliumMaterialEnchantability * 1.5f));
+	private static ItemArmor.ArmorMaterial DRACONIC_SOULIUM_A = EnumHelper.addArmorMaterial("DRACONIC_SOULIUM", Configs.souliumMaterialDurability * 5, new int[]{4, 8, 6, 4}, Configs.souliumMaterialEnchantability * 2);
 
 	// Setting up the enchantment details from the config
 	public static Enchantment SOUL_STEALER = new EnchantmentSoulStealer(Configs.enchantID, Configs.enchantWeight);
@@ -71,19 +68,23 @@ public class ModRegistry {
 	public static Item ItemAxeSoul3 = new ItemAxeSoul(DRACONIC_SOULIUM);
 	public static Item ItemSpadeSoul3 = new ItemSpadeSoul(DRACONIC_SOULIUM);
 
+	public static Item ItemBowSoul = new ItemBowSoul(SOULIUM);
+	public static Item ItemBowSoul2 = new ItemBowSoul(IMPROVED_SOULIUM);
+	public static Item ItemBowSoul3 = new ItemBowSoul(DRACONIC_SOULIUM);
+
 	public static Item ItemSoulHelm = new ItemSoulArmor(SOULIUM_A, 0);
 	public static Item ItemSoulChest = new ItemSoulArmor(SOULIUM_A, 1);
-	public static Item ItemSoulLeg = new ItemSoulArmor(SOULIUM_A, 2);
+	public static Item ItemSoulLegs = new ItemSoulArmor(SOULIUM_A, 2);
 	public static Item ItemSoulBoots = new ItemSoulArmor(SOULIUM_A, 3);
 
 	public static Item ItemSoulHelm2 = new ItemSoulArmor(IMPROVED_SOULIUM_A, 0);
 	public static Item ItemSoulChest2 = new ItemSoulArmor(IMPROVED_SOULIUM_A, 1);
-	public static Item ItemSoulLeg2 = new ItemSoulArmor(IMPROVED_SOULIUM_A, 2);
+	public static Item ItemSoulLegs2 = new ItemSoulArmor(IMPROVED_SOULIUM_A, 2);
 	public static Item ItemSoulBoots2 = new ItemSoulArmor(IMPROVED_SOULIUM_A, 3);
 
 	public static Item ItemSoulHelm3 = new ItemSoulArmor(DRACONIC_SOULIUM_A, 0);
 	public static Item ItemSoulChest3 = new ItemSoulArmor(DRACONIC_SOULIUM_A, 1);
-	public static Item ItemSoulLeg3 = new ItemSoulArmor(DRACONIC_SOULIUM_A, 2);
+	public static Item ItemSoulLegs3 = new ItemSoulArmor(DRACONIC_SOULIUM_A, 2);
 	public static Item ItemSoulBoots3 = new ItemSoulArmor(DRACONIC_SOULIUM_A, 3);
 
 	// Set up the mod blocks
@@ -107,32 +108,39 @@ public class ModRegistry {
 	private static void registerItems() {
 		GameRegistry.registerItem(ItemMaterials, "ItemMaterialsSoul");
 		GameRegistry.registerItem(ItemSoulShard, "ItemSoulShard");
+
 		GameRegistry.registerItem(ItemSwordSoul, "ItemSwordSoul");
 		GameRegistry.registerItem(ItemPickaxeSoul, "ItemPickaxeSoul");
 		GameRegistry.registerItem(ItemAxeSoul, "ItemAxeSoul");
 		GameRegistry.registerItem(ItemSpadeSoul, "ItemSpadeSoul");
+
 		GameRegistry.registerItem(ItemSwordSoul2, "ItemSwordSoul2");
 		GameRegistry.registerItem(ItemPickaxeSoul2, "ItemPickaxeSoul2");
 		GameRegistry.registerItem(ItemAxeSoul2, "ItemAxeSoul2");
 		GameRegistry.registerItem(ItemSpadeSoul2, "ItemSpadeSoul2");
+
 		GameRegistry.registerItem(ItemSwordSoul3, "ItemSwordSoul3");
 		GameRegistry.registerItem(ItemPickaxeSoul3, "ItemPickaxeSoul3");
 		GameRegistry.registerItem(ItemAxeSoul3, "ItemAxeSoul3");
 		GameRegistry.registerItem(ItemSpadeSoul3, "ItemSpadeSoul3");
 
+		GameRegistry.registerItem(ItemBowSoul, "ItemBowSoul");
+		GameRegistry.registerItem(ItemBowSoul2, "ItemBowSoul2");
+		GameRegistry.registerItem(ItemBowSoul3, "ItemBowSoul3");
+
 		GameRegistry.registerItem(ItemSoulHelm, "ItemSoulHelm");
 		GameRegistry.registerItem(ItemSoulChest, "ItemSoulChest");
-		GameRegistry.registerItem(ItemSoulLeg, "ItemSoulLeg");
+		GameRegistry.registerItem(ItemSoulLegs, "ItemSoulLegs");
 		GameRegistry.registerItem(ItemSoulBoots, "ItemSoulBoots");
 
 		GameRegistry.registerItem(ItemSoulHelm2, "ItemSoulHelm2");
 		GameRegistry.registerItem(ItemSoulChest2, "ItemSoulChest2");
-		GameRegistry.registerItem(ItemSoulLeg2, "ItemSoulLeg2");
+		GameRegistry.registerItem(ItemSoulLegs2, "ItemSoulLegs2");
 		GameRegistry.registerItem(ItemSoulBoots2, "ItemSoulBoots2");
 
 		GameRegistry.registerItem(ItemSoulHelm3, "ItemSoulHelm3");
 		GameRegistry.registerItem(ItemSoulChest3, "ItemSoulChest3");
-		GameRegistry.registerItem(ItemSoulLeg3, "ItemSoulLeg3");
+		GameRegistry.registerItem(ItemSoulLegs3, "ItemSoulLegs3");
 		GameRegistry.registerItem(ItemSoulBoots3, "ItemSoulBoots3");
 	}
 
@@ -173,18 +181,30 @@ public class ModRegistry {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemPickaxeSoul), "AAA", "CBC", "CBC", 'A', "ingotSoulium", 'B', "ingotIron"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemAxeSoul), "AA", "AB", "CB", 'A', "ingotSoulium", 'B', "ingotIron"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSpadeSoul), "A", "B", "B", 'A', "ingotSoulium", 'B', "ingotIron"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemBowSoul), " AB", "A B", " AB", 'A', "ingotSoulium", 'B', "ingotIron"));
+
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSoulHelm), "AAA", "A A", "   ", 'A', "ingotSoulium"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSoulChest), "A A", "AAA", "AAA", 'A', "ingotSoulium"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSoulLegs), "AAA", "A A", "A A", 'A', "ingotSoulium"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSoulBoots), "A A", "A A", "   ", 'A', "ingotSoulium"));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSwordSoul2), "A", "C", "B", 'A', "ingotSouliumImproved", 'B', "ingotIron", 'C', ItemSwordSoul));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemPickaxeSoul2), "AAA", " B ", " B ", 'A', "ingotSouliumImproved", 'B', "ingotIron", 'C', ItemPickaxeSoul));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemAxeSoul2), " AA", " BA", " B ", 'A', "ingotSouliumImproved", 'B', "ingotIron", 'C', ItemAxeSoul));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSpadeSoul2), "A", "C", "B", 'A', "ingotSouliumImproved", 'B', "ingotIron", 'C', ItemSpadeSoul));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemBowSoul2), " AB", "A C", " AB", 'A', "ingotSouliumImproved", 'B', "ingotIron", 'C', ItemBowSoul));
+
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSoulHelm), "ABA", "A A", "   ", 'A', "ingotSouliumImproved", 'B', ItemSoulHelm));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSoulChest), "A A", "ABA", "AAA", 'A', "ingotSouliumImproved", 'B', ItemSoulChest));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSoulLegs), "ABA", "A A", "A A", 'A', "ingotSouliumImproved", 'B', ItemSoulLegs));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ItemSoulBoots), "A A", "ABA", "   ", 'A', "ingotSouliumImproved", 'B', ItemSoulBoots));
 	}
 
 
     private static void registerSoulForgeRecipes() {
         sFHandler.addFuel(new ItemStack(ItemMaterials, 1, 2), 1000);
         sFHandler.addFuel(new ItemStack(Items.blaze_powder, 1, 0), 50);
-        sFHandler.addRecipe(new ItemStack(ItemSoulShard, 1), new ItemStack(Items.diamond), 24000);
+        sFHandler.addRecipe(new ItemStack(ItemSoulShard, 1), new ItemStack(Configs.harderSoulgems ? Items.nether_star : Items.diamond), 24000);
         sFHandler.addRecipe(new ItemStack(ItemMaterials, 1, 1), new ItemStack(Items.gold_ingot), 1800);
         sFHandler.addRecipe(new ItemStack(ItemMaterials, 1, 2), new ItemStack(Blocks.soul_sand), 500);
     }
