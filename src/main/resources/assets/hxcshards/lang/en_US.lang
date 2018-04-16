@@ -10,6 +10,9 @@ item.HxCShards.material.ingot.soulium.name=Soulium Ingot
 item.HxCShards.material.dust.vile.name=Vile Dust
 item.HxCShards.material.ingot.improved_soulium.name=Improved Soulium Ingot
 item.HxCShards.material.ingot.draconic_soulium.name=Doom Ingot
+material.hxcshards.soulium=Soulium
+material.hxcshards.improvedsoulium=Improved Soulium
+material.hxcshards.doomsoulium=Doom
 
 # Tools
 HxCShards.soultool.sword.name=Soul Blade

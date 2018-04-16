@@ -4,6 +4,9 @@ import HxCKDMS.HxCShards.HxCShards;
 import HxCKDMS.HxCShards.block.BlockCage;
 import HxCKDMS.HxCShards.block.BlockForge;
 import HxCKDMS.HxCShards.block.BlockMaterials;
+import HxCKDMS.HxCShards.block.RGBFluid;
+import HxCKDMS.HxCShards.compat.tinkers.TinkerMaterial;
+import HxCKDMS.HxCShards.compat.tinkers.TinkersConfig;
 import HxCKDMS.HxCShards.enchantment.EnchantmentSoulStealer;
 import HxCKDMS.HxCShards.events.Achievements;
 import HxCKDMS.HxCShards.guihandler.GuiHandler;
@@ -17,6 +20,9 @@ import HxCKDMS.HxCShards.tileentity.TileEntityForge;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import hxckdms.hxcconfig.HxCConfig;
+import hxckdms.hxcconfig.handlers.SpecialHandlers;
+import hxckdms.hxccore.libraries.GlobalVariables;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
@@ -26,9 +32,13 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+
+import java.util.HashMap;
 
 @SuppressWarnings("WeakerAccess")
 public class ModRegistry {
@@ -40,6 +50,9 @@ public class ModRegistry {
 	private static ItemArmor.ArmorMaterial SOULIUM_A = EnumHelper.addArmorMaterial("SOULIUM", Configs.souliumMaterialDurability, new int[]{2, 5, 4, 2}, Configs.souliumMaterialEnchantability);
 	private static ItemArmor.ArmorMaterial IMPROVED_SOULIUM_A = EnumHelper.addArmorMaterial("IMPROVED_SOULIUM", Configs.souliumMaterialDurability * 2, new int[]{3, 6, 5, 3}, Math.round(Configs.souliumMaterialEnchantability * 1.5f));
 	private static ItemArmor.ArmorMaterial DRACONIC_SOULIUM_A = EnumHelper.addArmorMaterial("DRACONIC_SOULIUM", Configs.souliumMaterialDurability * 5, new int[]{4, 8, 6, 4}, Configs.souliumMaterialEnchantability * 2);
+
+	public static HashMap<String, Fluid> fluids = new HashMap<>();
+	public static HashMap<String, Block> leFluids = new HashMap<>();
 
 	// Setting up the enchantment details from the config
 	public static Enchantment SOUL_STEALER = new EnchantmentSoulStealer(Configs.enchantID, Configs.enchantWeight);
@@ -92,6 +105,8 @@ public class ModRegistry {
 	public static Block BlockForge = new BlockForge().setCreativeTab(CREATIVE_TAB);
 	public static Block BlockMaterials = new BlockMaterials();
 
+	public static HxCConfig tconfig;
+
 	public static void registerObjects() {
 		NetworkRegistry.INSTANCE.registerGuiHandler(HxCShards.modInstance, new GuiHandler());
 
@@ -103,6 +118,38 @@ public class ModRegistry {
         sFHandler = new SFRecipeHandler();
         registerSoulForgeRecipes();
         Achievements.Get();
+
+        if (Loader.isModLoaded("TConstruct")) {
+        	fluids.put("fluid_soulium", new Fluid("Soulium"));
+			fluids.put("fluid_improvedsoulium", new Fluid("ImprovedSoulium"));
+			fluids.put("fluid_doomsoulium", new Fluid("DoomSoulium"));
+			SpecialHandlers.registerSpecialClass(TinkerMaterial.class);
+        	tconfig = new HxCConfig(TinkersConfig.class, "HxCSoulShards-Tinkers", GlobalVariables.modConfigDir, "cfg", "HxCSoulShards");
+        	TinkersConfig.init();
+        	tconfig.initConfiguration();
+
+			fluids.forEach((name, fluid) -> {
+				fluid.setTemperature(400);
+				fluid.setViscosity(4);
+				fluid.setDensity(3);
+				FluidRegistry.registerFluid(fluid);
+				System.out.println(name + " registering ");
+				Block lef = new RGBFluid(fluid, TinkersConfig.materials.get(name.substring(6).toLowerCase()).Colour).setBlockName(name);
+				leFluids.putIfAbsent(name, lef);
+				GameRegistry.registerBlock(lef, Reference.modID + "_fluid_" + name);
+				fluid.setUnlocalizedName(lef.getUnlocalizedName());
+			});
+			TinkersConfig.materials.forEach((name, mat) -> {
+			/*
+				System.out.println(fluids.keySet().toString());
+				System.out.println("Name is " + name);
+				System.out.println("Mat Name is " + mat.MaterialName);
+				System.out.println("Attempting to get " + "fluid_" + mat.MaterialName.toLowerCase());
+				System.out.println("Attempting to get " + ModRegistry.fluids.get("fluid_" + mat.MaterialName.toLowerCase()));
+				*/
+				mat.init();
+			});
+		}
 	}
 
 	private static void registerItems() {

@@ -14,7 +14,7 @@ public class PlayerHurtEvent {
             EntityPlayer player = (EntityPlayer) event.entityLiving;
 
             for (int i = 0; i < 4; i++) {
-                if (isTier3(player.getCurrentArmor(i).getItem()) && player.getCurrentArmor(i).hasTagCompound() && player.getCurrentArmor(i).getTagCompound().hasKey("Souls")) {
+                if (player.getCurrentArmor(i) != null && isTier3(player.getCurrentArmor(i).getItem()) && player.getCurrentArmor(i).hasTagCompound() && player.getCurrentArmor(i).getTagCompound().hasKey("Souls")) {
                     if (player.getCurrentArmor(i).getTagCompound().getInteger("Souls") > 0) {
                         player.heal(Configs.Tier3ArmorHeal);
                         player.getCurrentArmor(i).getTagCompound().setInteger("Souls", player.getCurrentArmor(i).getTagCompound().getInteger("Souls") - 1);

@@ -24,7 +24,9 @@ public class BlockMaterials extends Block {
 	}
 
 	public static final String[] names = new String[] { 
-		"Soulium",		// 0
+		"Soulium",			// 0
+		"ImprovedSoulium",	// 1
+		"DraconicSoulium"	// 2
 	};
 	
 	@Override
